@@ -87,7 +87,7 @@
         </option>
         <option>
           <name>OGLastSavedByProductVersion</name>
-          <state>6.40.2.53991</state>
+          <state>6.50.5.4846</state>
         </option>
         <option>
           <name>GeneralEnableMisra</name>
@@ -2026,19 +2026,16 @@
   <group>
     <name>User</name>
     <file>
-      <name>$PROJ_DIR$\..\..\STM32L1xx_StdPeriph_Examples\RTC\Calendar\main.c</name>
+      <name>$PROJ_DIR$\..\..\STM32L1xx_StdPeriph_Examples\ADC\ADC1_IDDmeas\main.c</name>
     </file>
     <file>
-      <name>$PROJ_DIR$\..\..\STM32L1xx_StdPeriph_Examples\RTC\Calendar\main.h</name>
+      <name>$PROJ_DIR$\..\..\STM32L1xx_StdPeriph_Examples\ADC\ADC1_IDDmeas\stm32l1xx_conf.h</name>
     </file>
     <file>
-      <name>$PROJ_DIR$\..\..\STM32L1xx_StdPeriph_Examples\RTC\Calendar\stm32l1xx_conf.h</name>
+      <name>$PROJ_DIR$\..\..\STM32L1xx_StdPeriph_Examples\ADC\ADC1_IDDmeas\stm32l1xx_it.c</name>
     </file>
     <file>
-      <name>$PROJ_DIR$\..\..\STM32L1xx_StdPeriph_Examples\RTC\Calendar\stm32l1xx_it.c</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\..\STM32L1xx_StdPeriph_Examples\RTC\Calendar\stm32l1xx_it.h</name>
+      <name>$PROJ_DIR$\..\..\STM32L1xx_StdPeriph_Examples\ADC\ADC1_IDDmeas\stm32l1xx_it.h</name>
     </file>
   </group>
 </project>

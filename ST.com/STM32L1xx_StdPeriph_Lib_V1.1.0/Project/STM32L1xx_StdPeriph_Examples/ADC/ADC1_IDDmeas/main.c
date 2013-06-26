@@ -111,6 +111,15 @@ void DisplayIDDrunmA(uint32_t IDDmeas);
   */
 int main(void)
 {
+  /* Initialize the LCD */
+  STM32L152_LCD_Init();	
+  LCD_Clear( Blue );
+  LCD_SetBackColor( Blue );
+  LCD_SetTextColor( White );
+  LCD_DisplayStringLine( Line0, "  STM32L152-EVAL  " );
+  LCD_DisplayStringLine( Line1, "StdPeriphLibV1.1.0" );
+  LCD_DisplayStringLine( Line2, "ADC1 IDD measuremt" );
+
   /*!< At this stage the microcontroller clock setting is already configured, 
        this is done through SystemInit() function which is called from startup
        file (startup_stm32l1xx_xx.s) before to branch to application main.
