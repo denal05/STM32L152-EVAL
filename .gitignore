@@ -1,0 +1,9 @@
+# ignore build directory EWARM for STM32L152-EVAL_FW_V1.0.0
+ST.com/STM32L152-EVAL_FW_V1.0.0/Project/STM32L152-EVAL/EWARM/*
+
+# ignore build directory EWARM for STM32L1xx_StdPeriph_Lib_V1.1.0
+ST.com/STM32L1xx_StdPeriph_Lib_V1.1.0/Project/STM32L1xx_StdP
+eriph_Templates/EWARM/*
+
+# ignore specific extensions
+*.pbd
