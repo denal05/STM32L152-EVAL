@@ -29,8 +29,10 @@
 
 #ifdef USE_STM32L152D_EVAL 
   #include "stm32l152d_eval.h"
+  #include "stm32l152d_eval_lcd.h"
 #elif defined USE_STM32L152_EVAL 
   #include "stm32l152_eval.h"
+  #include "stm32l152_eval_lcd.h"
 #endif 
 
 /** @addtogroup STM32L1xx_StdPeriph_Examples
@@ -164,10 +166,18 @@ void ADC1_IRQHandler(void)
   {
     /*  Turn on LED1 */
     STM_EVAL_LEDOn(LED1);
+    LCD_DisplayStringLine( Line7, "LED1 is ON          " );
+    LCD_DisplayStringLine( Line8, "Ch. 18 <> threshold " );
+    
     /* Clear ADC1 AWD pending interrupt bit */
     ADC_ClearITPendingBit(ADC1, ADC_IT_AWD);
+  }
+  else // ADC_IT_AWD is reset
+  {    
     /*  Turn Off LED1 */
     STM_EVAL_LEDOff(LED1);
+    LCD_DisplayStringLine( Line7, "LED1 is off         " );
+    LCD_DisplayStringLine( Line8, "                    " );    
   }
 }
 

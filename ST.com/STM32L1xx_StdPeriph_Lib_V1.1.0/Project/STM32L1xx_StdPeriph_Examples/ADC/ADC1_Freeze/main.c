@@ -25,6 +25,12 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
+#ifdef USE_STM32L152D_EVAL 
+  #include "stm32l152d_eval_lcd.h"
+#elif defined USE_STM32L152_EVAL 
+  #include "stm32l152_eval_lcd.h"
+#endif 
+
 /** @addtogroup STM32L1xx_StdPeriph_Examples
   * @{
   */
@@ -90,6 +96,22 @@ int main(void)
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32l1xx.c file
      */
+
+  /* Initialize the LCD */
+  STM32L152_LCD_Init();	
+  LCD_Clear( Blue );
+  LCD_SetBackColor( Blue );
+  LCD_SetTextColor( White );
+  LCD_DisplayStringLine( Line0, "   STM32L152-EVAL   " );
+  LCD_DisplayStringLine( Line1, " StdPeriphLibV1.1.0 " );
+  LCD_DisplayStringLine( Line2, "ADC1 Freeze, Powrdwn" );
+  LCD_DisplayStringLine( Line3, "                    " );
+  LCD_DisplayStringLine( Line4, "INSTRUCTIONS:       " );
+  LCD_DisplayStringLine( Line5, "Turn pot. RV3 or    " );
+  LCD_DisplayStringLine( Line6, "press Key button    " );
+  LCD_DisplayStringLine( Line7, "                    " );
+  LCD_DisplayStringLine( Line8, "RV3 IDD             " );
+  LCD_DisplayStringLine( Line9, "                    " );
 
   /* LCD GLASS Configuration */
   LCD_Glass_Config();
@@ -260,7 +282,7 @@ void DisplayOnLCD(uint16_t data1, uint16_t data2)
 {
   uint16_t rv3voltage=0;
   uint32_t iddrun = 0;
-
+  int index = 0, LCD_LINE = 220;
   
 #ifdef USE_STM32L152D_EVAL 
   uint8_t LCDString[7]="00V 00";
@@ -333,6 +355,19 @@ void DisplayOnLCD(uint16_t data1, uint16_t data2)
   
   /* Display one character on LCD */
   LCD_GLASS_WriteChar(&LCDString[7], POINT_OFF, APOSTROPHE_OFF, 7);
+
+  /* Display the same info on the big LCD screen */
+  for (index = 0; index <= 5; index++)
+  {
+    /* Display one character on LCD */
+    LCD_DisplayChar(LCD_LINE, (319 - (16 * index)), LCDString[index]);
+  }
+  
+  /* Display one character on LCD */
+  LCD_DisplayChar(LCD_LINE, (319 - (16 * ++index)), (uint8_t) 'm');
+  
+  /* Display one character on LCD */
+  LCD_DisplayChar(LCD_LINE, (319 - (16 * ++index)), (uint8_t) 'A');
   
 #elif defined USE_STM32L152D_EVAL 
   /* Display one character on LCD */

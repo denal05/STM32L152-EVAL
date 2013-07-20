@@ -43,6 +43,8 @@
 FunctionalState PowerDownState = DISABLE;
 
 /* Private function prototypes -----------------------------------------------*/
+void EXTI0_IRQHandler(void);
+
 /* Private functions ---------------------------------------------------------*/
 
 /******************************************************************************/

@@ -27,8 +27,12 @@
 
 #ifdef USE_STM32L152D_EVAL 
   #include "stm32l152d_eval.h"
+  #include "stm32l152d_eval_lcd.h"
+  #include "stm32l152d_eval_glass_lcd.h
 #elif defined USE_STM32L152_EVAL 
   #include "stm32l152_eval.h"
+  #include "stm32l152_eval_lcd.h"
+  #include "stm32l152_eval_glass_lcd.h"
 #endif 
 
 /** @addtogroup STM32L1xx_StdPeriph_Examples
@@ -56,13 +60,25 @@ NVIC_InitTypeDef NVIC_InitStructure;
   * @retval None
   */
 int main(void)
-{
+{  
   /*!< At this stage the microcontroller clock setting is already configured, 
        this is done through SystemInit() function which is called from startup
        file (startup_stm32l1xx_xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32l1xx.c file
      */
+
+  /* Initialize the LCD */
+  STM32L152_LCD_Init();	
+  LCD_Clear( Blue );
+  LCD_SetBackColor( Blue );
+  LCD_SetTextColor( White );
+  LCD_DisplayStringLine( Line0, "   STM32L152-EVAL   " );
+  LCD_DisplayStringLine( Line1, " StdPeriphLibV1.1.0 " );
+  LCD_DisplayStringLine( Line2, "ADC1 AnalogWatchdog " );
+  LCD_DisplayStringLine( Line3, "                    " );
+  LCD_DisplayStringLine( Line4, "INSTRUCTIONS:       " );
+  LCD_DisplayStringLine( Line5, "Turn pot. RV3       " );
 
   /* Configure LED1 available on STM32L152X-EVAL board ---------------------- */
   STM_EVAL_LEDInit(LED1);

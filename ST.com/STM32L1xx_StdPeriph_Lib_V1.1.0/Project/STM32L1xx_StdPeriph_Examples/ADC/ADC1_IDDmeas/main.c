@@ -111,21 +111,21 @@ void DisplayIDDrunmA(uint32_t IDDmeas);
   */
 int main(void)
 {
-  /* Initialize the LCD */
-  STM32L152_LCD_Init();	
-  LCD_Clear( Blue );
-  LCD_SetBackColor( Blue );
-  LCD_SetTextColor( White );
-  LCD_DisplayStringLine( Line0, "  STM32L152-EVAL  " );
-  LCD_DisplayStringLine( Line1, "StdPeriphLibV1.1.0" );
-  LCD_DisplayStringLine( Line2, "ADC1 IDD measuremt" );
-
   /*!< At this stage the microcontroller clock setting is already configured, 
        this is done through SystemInit() function which is called from startup
        file (startup_stm32l1xx_xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32l1xx.c file
      */
+
+  /* Initialize the LCD */
+  STM32L152_LCD_Init();	
+  LCD_Clear( Blue );
+  LCD_SetBackColor( Blue );
+  LCD_SetTextColor( White );
+  LCD_DisplayStringLine( Line0, "   STM32L152-EVAL   " );
+  LCD_DisplayStringLine( Line1, " StdPeriphLibV1.1.0 " );
+  LCD_DisplayStringLine( Line2, "ADC1 IDD measurement" );
 
   /* USARTx configured as follow:
         - BaudRate = 115200 baud  
@@ -144,19 +144,21 @@ int main(void)
 
   STM_EVAL_COMInit(COM1, &USART_InitStructure);
 
-  /* Initialize the LCD */
+/*
+  // Initialize the LCD
 #ifdef USE_STM32L152D_EVAL 
   STM32L152D_LCD_Init();
 #else  
   STM32L152_LCD_Init();
 #endif
 
-  /* Clear the LCD */
+  // Clear the LCD
   LCD_Clear(LCD_COLOR_WHITE);
 
-  /* LCD GLASS Configuration */
+  // LCD GLASS Configuration
   LCD_Glass_Config();
-
+*/
+  
 #ifdef USE_STM32L152D_EVAL 
   /* Set VALUEUNIT_MILLIAMPERE */
   LCD_GLASS_ValueUnitConfig(VALUEUNIT_MILLIAMPERE);
@@ -321,7 +323,7 @@ void DisplayIDDrunmA(uint32_t IDDmeas)
   /* 0.01 mA current value */
   LCDString[5] = ((uint8_t)(IDDrunuA % 10)) + 0x30;
 
-  int index = 0, LCD_LINE = 0;
+  int index = 0, LCD_LINE = 100;
   
 #ifdef USE_STM32L152_EVAL 
   /* Display one character on LCD */
