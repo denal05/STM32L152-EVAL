@@ -27,13 +27,13 @@
 #include <stdlib.h>
 
 #ifdef USE_STM32L152D_EVAL
-#include "stm32l152d_eval.h"
-#include "stm32l152d_eval_i2c_tsensor.h"
-#include "stm32l152d_eval_lcd.h"
-#else
-#include "stm32l152_eval.h"
-#include "stm32l152_eval_i2c_tsensor.h"
-#include "stm32l152_eval_lcd.h"
+  #include "stm32l152d_eval.h"
+  #include "stm32l152d_eval_i2c_tsensor.h"
+  #include "stm32l152d_eval_lcd.h"
+#elif defined USE_STM32L152_EVAL 
+  #include "stm32l152_eval.h"
+  #include "stm32l152_eval_i2c_tsensor.h"
+  #include "stm32l152_eval_lcd.h"
 #endif
 
 /** @addtogroup STM32L1xx_StdPeriph_Examples
@@ -75,33 +75,31 @@ int main(void)
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32l1xx.c file
      */
-
+/* Initialize the LCD */ 
+#ifdef USE_STM32L152D_EVAL 
+  STM32L152D_LCD_Init();
+#elif defined USE_STM32L152_EVAL 
+  STM32L152_LCD_Init();	
+  LCD_Clear( Blue );
+  LCD_SetBackColor( Blue );
+  LCD_SetTextColor( White );
+  LCD_DisplayStringLine( Line0, "   STM32L152-EVAL   " );
+  LCD_DisplayStringLine( Line1, " StdPeriphLibV1.1.0 " );
+  LCD_DisplayStringLine( Line2, "  I2C Temp. Sensor  " );
+  LCD_DisplayStringLine( Line3, "                    " );
+#endif
+  
   uint32_t index = 0;
  
   /* NVIC Configuration */
   NVIC_Config();
-
-  /* Initialize the LCD */
-#ifdef USE_STM32L152D_EVAL 
-  STM32L152D_LCD_Init();
-#else  
-  STM32L152_LCD_Init();
-#endif
   
   /* Initialize the Temperature Sensor */
   LM75_Init();
 
-  if (LM75_GetStatus() == SUCCESS)
-  {
-    /* Clear the LCD */
-    LCD_Clear(LCD_COLOR_WHITE);
-
-    /* Set the Back Color */
-    LCD_SetBackColor(LCD_COLOR_BLUE);
-    /* Set the Text Color */
-    LCD_SetTextColor(LCD_COLOR_GREEN);
-    
-    LCD_DisplayStringLine(LCD_LINE_0, "     Temperature    ");
+  if (1) //// (LM75_GetStatus() == SUCCESS)
+  {    
+    LCD_DisplayStringLine(LCD_LINE_4, "     Temperature    ");
 
      /* Configure the Temperature sensor device STLM75:
            - Thermostat mode Interrupt
@@ -211,8 +209,8 @@ int main(void)
         LCD_SetBackColor(LCD_COLOR_BLUE);
         /* Set the Text Color */
         LCD_SetTextColor(LCD_COLOR_RED);
-        LCD_DisplayStringLine(LCD_LINE_2, "Warning: Temp exceed");
-        LCD_DisplayStringLine(LCD_LINE_3, "        32 C        ");
+        LCD_DisplayStringLine(LCD_LINE_4, "Warning: Temp exceed");
+        LCD_DisplayStringLine(LCD_LINE_5, "        32 C        ");
       }
       if (SMbusAlertOccurred == 2)
       {
@@ -233,10 +231,10 @@ int main(void)
   else
   {
     LCD_Clear(LCD_COLOR_WHITE);
-    LCD_DisplayStringLine(LCD_LINE_2, " LM75 not correctly ");
-    LCD_DisplayStringLine(LCD_LINE_3, " initialized...     ");
-    LCD_DisplayStringLine(LCD_LINE_4, " Please restart the ");
-    LCD_DisplayStringLine(LCD_LINE_5, " example.           ");   
+    LCD_DisplayStringLine(LCD_LINE_0, " LM75 not correctly ");
+    LCD_DisplayStringLine(LCD_LINE_1, " initialized...     ");
+    LCD_DisplayStringLine(LCD_LINE_2, " Please restart the ");
+    LCD_DisplayStringLine(LCD_LINE_3, " example.           ");   
     /* Infinite Loop */
     while(1)
     {

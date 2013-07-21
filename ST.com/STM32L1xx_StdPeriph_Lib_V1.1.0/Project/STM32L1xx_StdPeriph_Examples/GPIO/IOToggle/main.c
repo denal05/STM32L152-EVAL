@@ -27,11 +27,13 @@
 
 #ifdef USE_STM32L152D_EVAL 
   #include "stm32l152d_eval.h"
+  #include "stm32l152d_eval_lcd.h"
   #define GPIO_PIN_X GPIO_Pin_3
   #define GPIO_PIN_Y GPIO_Pin_7
   #define BSRR_VAL 0x88
 #elif defined USE_STM32L152_EVAL 
   #include "stm32l152_eval.h"
+  #include "stm32l152_eval_lcd.h"
   #define GPIO_PIN_X GPIO_Pin_0
   #define GPIO_PIN_Y GPIO_Pin_1
   #define BSRR_VAL 0x03
@@ -52,6 +54,8 @@ GPIO_InitTypeDef        GPIO_InitStructure;
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 /* Private function prototypes -----------------------------------------------*/
+void Delay(__IO uint32_t nCount);
+
 /* Private functions ---------------------------------------------------------*/
 
 /**
@@ -67,6 +71,25 @@ int main(void)
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32l1xx.c file
      */
+/* Initialize the LCD */ 
+#ifdef USE_STM32L152D_EVAL 
+  STM32L152D_LCD_Init();
+#elif defined USE_STM32L152_EVAL 
+  STM32L152_LCD_Init();	
+  LCD_Clear( Blue );
+  LCD_SetBackColor( Blue );
+  LCD_SetTextColor( White );
+  LCD_DisplayStringLine( Line0, "   STM32L152-EVAL   " );
+  LCD_DisplayStringLine( Line1, " StdPeriphLibV1.1.0 " );
+  LCD_DisplayStringLine( Line2, "    GPIO/IO Toggle  " );
+  LCD_DisplayStringLine( Line3, "                    " );
+  LCD_DisplayStringLine( Line4, "This example shows  " );
+  LCD_DisplayStringLine( Line5, "how to use BSRRH and" );
+  LCD_DisplayStringLine( Line6, "BSRRL (Port Bit Set/" );
+  LCD_DisplayStringLine( Line7, "Reset Register High " );
+  LCD_DisplayStringLine( Line8, "and Low) for IO     " );
+  LCD_DisplayStringLine( Line9, "toggling.           " );
+#endif 
 
   /* GPIOD Periph clock enable */
   RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOD, ENABLE);

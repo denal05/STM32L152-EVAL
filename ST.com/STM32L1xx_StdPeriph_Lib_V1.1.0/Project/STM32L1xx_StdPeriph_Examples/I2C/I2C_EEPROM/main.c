@@ -24,11 +24,11 @@
 
 /* Includes ------------------------------------------------------------------*/
 #ifdef USE_STM32L152D_EVAL
-#include "stm32l152d_eval_i2c_ee.h"
-#include "stm32l152d_eval_lcd.h"
-#else
-#include "stm32l152_eval_i2c_ee.h"
-#include "stm32l152_eval_lcd.h"
+  #include "stm32l152d_eval_i2c_ee.h"
+  #include "stm32l152d_eval_lcd.h"
+#elif defined USE_STM32L152_EVAL 
+  #include "stm32l152_eval_i2c_ee.h"
+  #include "stm32l152_eval_lcd.h"
 #endif
 
 /** @addtogroup STM32L1xx_StdPeriph_Examples
@@ -70,6 +70,8 @@ uint8_t Rx1_Buffer[BUFFER_SIZE1], Rx2_Buffer[BUFFER_SIZE2];
 volatile TestStatus TransferStatus1 = FAILED, TransferStatus2 = FAILED;
 volatile uint16_t NumDataRead = 0;
 
+/* Private function prototypes -----------------------------------------------*/
+
 /* Private functions ---------------------------------------------------------*/
 TestStatus Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength);
 
@@ -94,11 +96,14 @@ int main(void)
 #else
   STM32L152_LCD_Init();
 #endif 
-  LCD_Clear(LCD_COLOR_BLUE);  
-  LCD_SetBackColor(LCD_COLOR_BLUE);
-  LCD_SetTextColor(LCD_COLOR_WHITE);
-  LCD_DisplayStringLine(LCD_LINE_0, "SMT32L1xx FW Library");
-  LCD_DisplayStringLine(LCD_LINE_1, "   EEPROM Example   ");
+  STM32L152_LCD_Init();	
+  LCD_Clear( Blue );
+  LCD_SetBackColor( Blue );
+  LCD_SetTextColor( White );
+  LCD_DisplayStringLine( Line0, "   STM32L152-EVAL   " );
+  LCD_DisplayStringLine( Line1, " StdPeriphLibV1.1.0 " );
+  LCD_DisplayStringLine( Line2, "     I2C EEPROM     " );
+  LCD_DisplayStringLine( Line3, "                    " );
 #endif /* ENABLE_LCD_MSG_DISPLAY */  
   
   /* Initialize the I2C EEPROM driver ----------------------------------------*/
@@ -130,7 +135,7 @@ int main(void)
      transfer. */
  
 #ifdef ENABLE_LCD_MSG_DISPLAY  
-  LCD_DisplayStringLine(LCD_LINE_3, " Transfer 1 Ongoing ");
+  LCD_DisplayStringLine(LCD_LINE_4, " Transfer 1 Ongoing ");
 #endif /* ENABLE_LCD_MSG_DISPLAY */ 
   
   /* Wait till DMA transfer is compelete (Tranfer complete interrupt handler 
@@ -147,11 +152,11 @@ int main(void)
 #ifdef ENABLE_LCD_MSG_DISPLAY  
   if (TransferStatus1 == PASSED)
   {
-    LCD_DisplayStringLine(LCD_LINE_3, " Transfer 1 PASSED  ");
+    LCD_DisplayStringLine(LCD_LINE_4, " Transfer 1 PASSED  ");
   }
   else
   {
-    LCD_DisplayStringLine(LCD_LINE_3, " Transfer 1 FAILED  ");
+    LCD_DisplayStringLine(LCD_LINE_4, " Transfer 1 FAILED  ");
   }  
 #endif /* ENABLE_LCD_MSG_DISPLAY */  
 
