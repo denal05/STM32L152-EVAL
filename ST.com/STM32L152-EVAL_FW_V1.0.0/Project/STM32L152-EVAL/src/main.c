@@ -98,8 +98,12 @@ int main(void)
   LCD_Clear( Blue );
   LCD_SetBackColor( Blue );
   LCD_SetTextColor( White );
-  LCD_DisplayStringLine( Line0, "  STM32L152-EVAL  " );
-        
+  LCD_DisplayStringLine( Line0, "   STM32L152-EVAL   " );
+  LCD_DisplayStringLine( Line1, "      FW_V1.0.0     " );
+  LCD_DisplayStringLine( Line2, "http://www.st.com/  " );
+  LCD_DisplayStringLine( Line3, "web/en/catalog/tools" );
+  LCD_DisplayStringLine( Line4, "/PF247169           " );
+
   /* Initialize the Demo */
   ////Demo_Init();
  
