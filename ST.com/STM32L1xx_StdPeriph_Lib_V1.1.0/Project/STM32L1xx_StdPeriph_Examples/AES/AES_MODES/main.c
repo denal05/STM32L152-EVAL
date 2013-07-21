@@ -24,9 +24,14 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32l1xx.h"
-#include "stm32l152d_eval.h"
-#include "stm32l152d_eval_lcd.h"
 
+#ifdef USE_STM32L152D_EVAL 
+  #include "stm32l152d_eval.h"
+  #include "stm32l152d_eval_lcd.h"
+#elif defined USE_STM32L152_EVAL 
+  #include "stm32l152_eval.h"
+  #include "stm32l152_eval_lcd.h"
+#endif
 
 /** @addtogroup STM32L1xx_StdPeriph_Examples
   * @{
@@ -42,9 +47,9 @@
 
 /* Define AES MODE  ----------------------------------------------------------*/
 /* Uncomment the line below if you will use the ECB Mode */
-/* #define AES_ECB */
+#define AES_ECB
 /* Uncomment the line below if you will use the CBC Mode */
-/* #define AES_CBC */ 
+/* #define AES_CBC */
 /* Uncomment the line below if you will use the CTR Mode */
 /* #define AES_CTR */
 
@@ -108,8 +113,22 @@ int main(void)
      */     
        
   /* Initialize the LCD */ 
+#ifdef USE_STM32L152D_EVAL 
   STM32L152D_LCD_Init();
- 
+#elif defined USE_STM32L152_EVAL 
+  STM32L152_LCD_Init();	
+  LCD_Clear( Blue );
+  LCD_SetBackColor( Blue );
+  LCD_SetTextColor( White );
+  LCD_DisplayStringLine( Line0, "   STM32L152-EVAL   " );
+  LCD_DisplayStringLine( Line1, " StdPeriphLibV1.1.0 " );
+  LCD_DisplayStringLine( Line2, "     AES MODES      " );
+  LCD_DisplayStringLine( Line3, "                    " );
+  LCD_DisplayStringLine( Line4, "This example goes to" );
+  LCD_DisplayStringLine( Line5, "HardFault_Handler on" );
+  LCD_DisplayStringLine( Line6, "my STM32L152-EVAL..." ); 
+#endif 
+
   /* Initialize LEDs available on STM32L15X-EVAL board ************************/
   STM_EVAL_LEDInit(LED1);
   STM_EVAL_LEDInit(LED2);
@@ -131,11 +150,6 @@ int main(void)
   AES_CTR_Encrypt(EncryptionKey, InitVector, PlainText, AES_TEXT_SIZE, CipherText);
 #endif
 
-  /* Clear the LCD */
-  LCD_Clear(LCD_COLOR_WHITE);
-  /* Set the Back Color */
-  LCD_SetBackColor(LCD_COLOR_BLUE);
-
   /* Read the CipherText and check content correctness */
 #if defined AES_ECB
   if(Buffercmp(ExpectedCipherText, CipherText, AES_TEXT_SIZE) != ERROR)
@@ -149,8 +163,13 @@ int main(void)
     /* Turn on LED1 */
     STM_EVAL_LEDOn(LED1);
     /* Set the Text Color */
+#ifdef USE_STM32L152D_EVAL 
     LCD_SetTextColor(LCD_COLOR_GREEN);
-    LCD_DisplayStringLine(LCD_LINE_2, "      Success       ");
+    LCD_DisplayStringLine(LCD_LINE_5, "      Success       ");
+#elif defined USE_STM32L152_EVAL 
+    LCD_SetTextColor( Green );
+    LCD_DisplayStringLine( Line5,     "      Success       " );
+#endif
   }
   else
   { 
@@ -158,17 +177,26 @@ int main(void)
     /* Turn on LED2 */
     STM_EVAL_LEDOn(LED2);
     /* Set the Text Color */
+#ifdef USE_STM32L152D_EVAL 
     LCD_SetTextColor(LCD_COLOR_RED);
-    LCD_DisplayStringLine(LCD_LINE_2, "       Failed       ");
+    LCD_DisplayStringLine(LCD_LINE_5, "       Failed       ");
+#elif defined USE_STM32L152_EVAL 
+    LCD_SetTextColor( Red );
+    LCD_DisplayStringLine( Line5,     "       Failed       " );
+#endif
   }
 
-  LCD_DisplayStringLine(LCD_LINE_1, "     Encryption     ");
+  LCD_DisplayStringLine(LCD_LINE_4, "     Encryption     ");
 #if defined AES_ECB
-    LCD_DisplayStringLine(LCD_LINE_0, "      ECB Mode      ");
+  #ifdef USE_STM32L152D_EVAL 
+    LCD_DisplayStringLine(LCD_LINE_3, "      ECB Mode      ");
+  #elif defined USE_STM32L152_EVAL 
+    LCD_DisplayStringLine( Line3,     "      ECB Mode      " );
+  #endif
 #elif defined AES_CBC
-    LCD_DisplayStringLine(LCD_LINE_0, "      CBC Mode      ");
+    LCD_DisplayStringLine(LCD_LINE_3, "      CBC Mode      ");
 #else /* CTR */
-    LCD_DisplayStringLine(LCD_LINE_0, "      CTR Mode      ");
+    LCD_DisplayStringLine(LCD_LINE_3, "      CTR Mode      ");
 #endif
 
   /*============================================================================
@@ -191,7 +219,7 @@ int main(void)
     STM_EVAL_LEDOn(LED3);
     /* Set the Text Color */
     LCD_SetTextColor(LCD_COLOR_GREEN);    
-    LCD_DisplayStringLine(LCD_LINE_6, "      Success       ");
+    LCD_DisplayStringLine(LCD_LINE_9, "      Success       ");
   }
   else
   { 
@@ -200,16 +228,16 @@ int main(void)
     STM_EVAL_LEDOn(LED4);
     /* Set the Text Color */
     LCD_SetTextColor(LCD_COLOR_RED);
-    LCD_DisplayStringLine(LCD_LINE_6, "       Failed       ");
+    LCD_DisplayStringLine(LCD_LINE_9, "       Failed       ");
   }
 
-  LCD_DisplayStringLine(LCD_LINE_5, "     Decryption     ");
+  LCD_DisplayStringLine(LCD_LINE_8, "     Decryption     ");
 #if defined AES_ECB
-    LCD_DisplayStringLine(LCD_LINE_4, "      ECB Mode      "); 
+    LCD_DisplayStringLine(LCD_LINE_7, "      ECB Mode      "); 
 #elif defined AES_CBC
-    LCD_DisplayStringLine(LCD_LINE_4, "      CBC Mode      "); 
+    LCD_DisplayStringLine(LCD_LINE_7, "      CBC Mode      "); 
 #else /* CTR */
-    LCD_DisplayStringLine(LCD_LINE_4, "      CTR Mode      ");
+    LCD_DisplayStringLine(LCD_LINE_7, "      CTR Mode      ");
 #endif
 
   while (1)

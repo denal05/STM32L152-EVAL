@@ -25,6 +25,12 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32l1xx.h"
 
+#ifdef USE_STM32L152D_EVAL 
+  #include "stm32l152d_eval_lcd.h"
+#elif defined USE_STM32L152_EVAL 
+  #include "stm32l152_eval_lcd.h"
+#endif
+
 /** @addtogroup STM32L1xx_StdPeriph_Examples
   * @{
   */
@@ -42,16 +48,21 @@
 #define THREAD_MODE_UNPRIVILEGED    0x01   /* Thread mode has unprivileged access */
 
 /* Private macro -------------------------------------------------------------*/
-#if defined ( __CC_ARM   )
-__ASM void __SVC(void) 
-{ 
-  SVC 0x01 
-  BX R14
-}
+#if defined   ( __CC_ARM   )
+  //// #error       "__CC_ARM ?"
+  __ASM void __SVC(void) 
+  { 
+    SVC 0x01 
+    BX R14
+  }
 #elif defined ( __ICCARM__ )
-static __INLINE  void __SVC()                     { __ASM ("svc 0x01");}
-#elif defined   (  __GNUC__  )
-static __INLINE void __SVC()                      { __ASM volatile ("svc 0x01");}
+  //// #error       "It seems __ICCARM__ is defined for IAR EWARM 6.50 "
+  static __INLINE  void __SVC()                     { __ASM ("svc 0x01");}
+#elif defined (  __GNUC__  )
+  //// #error        "__GNUC__ ?"
+  static __INLINE void __SVC()                      { __ASM volatile ("svc 0x01");}
+#else
+  #error "Neither __CC_ARM, nor __ICCARM__, nor __GNUC__ is defined! Which C compiler to use?"
 #endif
 
 /* Private variables ---------------------------------------------------------*/
@@ -74,7 +85,22 @@ int main(void)
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32l1xx.c file
      */     
-       
+
+/* Initialize the LCD */ 
+#ifdef USE_STM32L152D_EVAL 
+  STM32L152D_LCD_Init();
+#elif defined USE_STM32L152_EVAL 
+  STM32L152_LCD_Init();	
+  LCD_Clear( Blue );
+  LCD_SetBackColor( Blue );
+  LCD_SetTextColor( White );
+  LCD_DisplayStringLine( Line0, "   STM32L152-EVAL   " );
+  LCD_DisplayStringLine( Line1, " StdPeriphLibV1.1.0 " );
+  LCD_DisplayStringLine( Line2, "      CortexM3      " );
+  LCD_DisplayStringLine( Line3, "   Mode Privilege   " );
+  LCD_DisplayStringLine( Line4, "                    " );
+#endif 
+  
 /* Switch Thread mode Stack from Main to Process -----------------------------*/
   /* Initialize memory reserved for Process Stack */
   for(Index = 0; Index < SP_PROCESS_SIZE; Index++)
@@ -93,11 +119,13 @@ int main(void)
   {
     /* Main stack is used as the current stack */
     CurrentStack = SP_MAIN;
+    LCD_DisplayStringLine( Line5, "SP_MAIN" );
   }
   else
   {
     /* Process stack is used as the current stack */
     CurrentStack = SP_PROCESS;
+    LCD_DisplayStringLine( Line5, "SP_PROCESS" );
 
     /* Get process stack pointer value */
     PSPValue = __get_PSP();	
@@ -116,11 +144,13 @@ int main(void)
   {
     /* Thread mode has privileged access  */
     ThreadMode = THREAD_MODE_PRIVILEGED;
+    LCD_DisplayStringLine( Line6, "THREAD_MODE_PRIVILEG" );
   }
   else
   {
     /* Thread mode has unprivileged access*/
     ThreadMode = THREAD_MODE_UNPRIVILEGED;
+    LCD_DisplayStringLine( Line6, "THREAD_MODE_UNPRIVIL" );
   }
 
 /* Switch back Thread mode from unprivileged to privileged -------------------*/  
@@ -129,19 +159,26 @@ int main(void)
   __set_CONTROL(THREAD_MODE_PRIVILEGED | SP_PROCESS);
 
   /* Generate a system call exception, and in the ISR switch back Thread mode
-    to privileged */
-  __SVC();
+     to privileged */
+  /* For some reason, even though __ICCARM__ is defined for IAR EWARM 6.50 ,
+     the compiler doesn't like the __SVC() definition from above, so I've 
+     just copied the assembler code for __ICCARM__ that goes into SVC mode.
+  */  
+  //// __SVC();
+  __ASM ("svc 0x01");
 
   /* Check Thread mode privilege status */
   if((__get_CONTROL() & 0x01) == THREAD_MODE_PRIVILEGED)
   {
     /* Thread mode has privileged access  */
     ThreadMode = THREAD_MODE_PRIVILEGED;
+    LCD_DisplayStringLine( Line6, "THREAD_MODE_PRIVILEG" );
   }
   else
   {
     /* Thread mode has unprivileged access*/
     ThreadMode = THREAD_MODE_UNPRIVILEGED;
+    LCD_DisplayStringLine( Line6, "THREAD_MODE_UNPRIVIL" );
   }
 
   while (1)

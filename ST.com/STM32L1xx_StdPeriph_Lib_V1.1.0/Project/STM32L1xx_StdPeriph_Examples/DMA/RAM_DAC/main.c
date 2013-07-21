@@ -25,6 +25,12 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32l1xx.h"
 
+#ifdef USE_STM32L152D_EVAL 
+  #include "stm32l152d_eval_lcd.h"
+#elif defined USE_STM32L152_EVAL 
+  #include "stm32l152_eval_lcd.h"
+#endif
+
 /** @addtogroup STM32L1xx_StdPeriph_Examples
   * @{
   */
@@ -70,6 +76,24 @@ int main(void)
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32l1xx.c file
      */     
+/* Initialize the LCD */ 
+#ifdef USE_STM32L152D_EVAL 
+  STM32L152D_LCD_Init();
+#elif defined USE_STM32L152_EVAL 
+  STM32L152_LCD_Init();	
+  LCD_Clear( Blue );
+  LCD_SetBackColor( Blue );
+  LCD_SetTextColor( White );
+  LCD_DisplayStringLine( Line0, "   STM32L152-EVAL   " );
+  LCD_DisplayStringLine( Line1, " StdPeriphLibV1.1.0 " );
+  LCD_DisplayStringLine( Line2, "     DMA/RAM_DAC    " );
+  LCD_DisplayStringLine( Line3, "                    " );
+  LCD_DisplayStringLine( Line4, "This example shows  " );
+  LCD_DisplayStringLine( Line5, "how to use a DMA ch." );
+  LCD_DisplayStringLine( Line6, "to transfer a data  " );
+  LCD_DisplayStringLine( Line7, "buffer from RAM to  " );
+  LCD_DisplayStringLine( Line8, "DAC.                " );
+#endif 
 
   /* Fill Sine12bit table */
   for (Idx = 0; Idx < 32; Idx++)

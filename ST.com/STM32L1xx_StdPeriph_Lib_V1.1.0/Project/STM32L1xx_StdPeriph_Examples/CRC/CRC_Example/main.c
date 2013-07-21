@@ -25,6 +25,12 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32l1xx.h"
 
+#ifdef USE_STM32L152D_EVAL 
+  #include "stm32l152d_eval_lcd.h"
+#elif defined USE_STM32L152_EVAL 
+  #include "stm32l152_eval_lcd.h"
+#endif
+
 /** @addtogroup STM32L1xx_StdPeriph_Examples
   * @{
   */
@@ -63,8 +69,11 @@ static const uint32_t DataBuffer[BUFFER_SIZE] =
   };
 
 __IO uint32_t CRCValue = 0;
+uint8_t LCDString[9];
 
 /* Private function prototypes -----------------------------------------------*/
+void DisplayNumberOnLCD(uint32_t number);
+
 /* Private functions ---------------------------------------------------------*/
 
 /**
@@ -81,15 +90,122 @@ int main(void)
        system_stm32l1xx.c file
      */
 
+/* Initialize the LCD */ 
+#ifdef USE_STM32L152D_EVAL 
+  STM32L152D_LCD_Init();
+#elif defined USE_STM32L152_EVAL 
+  STM32L152_LCD_Init();	
+  LCD_Clear( Blue );
+  LCD_SetBackColor( Blue );
+  LCD_SetTextColor( White );
+  LCD_DisplayStringLine( Line0, "   STM32L152-EVAL   " );
+  LCD_DisplayStringLine( Line1, " StdPeriphLibV1.1.0 " );
+  LCD_DisplayStringLine( Line2, "        CRC         " );
+  LCD_DisplayStringLine( Line3, "                    " );
+#endif 
+
   /* Enable CRC clock */
   RCC_AHBPeriphClockCmd(RCC_AHBPeriph_CRC, ENABLE);
 
   /* Compute the CRC of "DataBuffer" */
   CRCValue = CRC_CalcBlockCRC((uint32_t *)DataBuffer, BUFFER_SIZE);
-
+  LCD_DisplayStringLine( Line4, "CRC should be       " );
+  LCD_DisplayStringLine( Line5, "933142278           " );
+  LCD_DisplayStringLine( Line6, "Calculated CRC is:  " );
+  DisplayNumberOnLCD(CRCValue);
+  
   while (1)
   {
   }
+}
+
+/**
+  * @brief  Display the IDD measured Value On the LCD Glass.
+  * @param  IDD measure
+  * @retval None
+  */
+void DisplayNumberOnLCD(uint32_t number)
+{ 
+  /* 1 000 000  current value*/
+  LCDString[0] =((uint8_t)(number / 100000000)) + 0x30;
+
+  /* 100 000  current value*/
+  LCDString[1] =((uint8_t)(number / 10000000)) + 0x30;
+
+  /* 10 000  current value*/
+  LCDString[2] =((uint8_t)(number / 1000000)) + 0x30;
+
+  /* 1000  current value*/
+  LCDString[3] =((uint8_t)(number / 100000)) + 0x30;
+  
+  /* 100 current value */
+  LCDString[4] =((uint8_t)((number % 100000) / 10000)) + 0x30;
+  
+  /* 10 current value */
+  LCDString[5] =((uint8_t)((number % 10000) / 1000)) + 0x30;
+  
+  /* 1 current value */
+  LCDString[6] =((uint8_t)((number % 1000) / 100)) + 0x30;
+  
+  /* 0.1 current value */
+  LCDString[7] =((uint8_t)((number % 100 ) / 10)) + 0x30;
+  
+  /* 0.01 current value */
+  LCDString[8] = ((uint8_t)(number % 10)) + 0x30;
+
+  int index = 0, LCD_LINE = Line7;
+  
+#ifdef USE_STM32L152_EVAL 
+  /* Display one character on LCD */
+  /*
+  LCD_GLASS_WriteChar(&LCDString[0], POINT_OFF, APOSTROPHE_OFF, 0);
+  LCD_DisplayChar(LCD_LINE_6, (319 - (16 * 0)), LCDString[0]);
+
+  LCD_GLASS_WriteChar(&LCDString[1], POINT_OFF, APOSTROPHE_OFF, 1);
+  LCD_DisplayChar(LCD_LINE_6, (319 - (16 * 1)), LCDString[1]);
+  
+  LCD_GLASS_WriteChar(&LCDString[2], POINT_ON, APOSTROPHE_OFF, 2);
+  LCD_DisplayChar(LCD_LINE_6, (319 - (16 * 2)), LCDString[2]);
+  
+  LCD_GLASS_WriteChar(&LCDString[3], POINT_OFF, APOSTROPHE_OFF, 3);
+  LCD_DisplayChar(LCD_LINE_6, (319 - (16 * 3)), LCDString[3]);
+  
+  LCD_GLASS_WriteChar(&LCDString[4], POINT_OFF, APOSTROPHE_OFF, 4);
+  LCD_DisplayChar(LCD_LINE_6, (319 - (16 * 4)), LCDString[4]);
+                  
+  LCD_GLASS_WriteChar(&LCDString[5], POINT_OFF, APOSTROPHE_OFF, 5);
+  LCD_DisplayChar(LCD_LINE_6, (319 - (16 * 5)), LCDString[5]);
+  */
+  
+  for (index = 0; index <= 8; index++)
+  {
+    /* Display one character on LCD */
+    LCD_DisplayChar(LCD_LINE, (319 - (16 * index)), LCDString[index]);
+  }
+  
+#elif defined USE_STM32L152D_EVAL
+  /* Display one character on LCD */
+  /*
+  LCD_GLASS_WriteChar(&LCDString[0], POINT_OFF, APOSTROPHE_OFF, 0);
+  
+  LCD_GLASS_WriteChar(&LCDString[1], POINT_OFF, APOSTROPHE_OFF, 1);
+  
+  LCD_GLASS_WriteChar(&LCDString[2], POINT_OFF, APOSTROPHE_OFF, 2);
+  
+  LCD_GLASS_WriteChar(&LCDString[3], POINT_ON, APOSTROPHE_OFF, 3);
+  
+  LCD_GLASS_WriteChar(&LCDString[4], POINT_OFF, APOSTROPHE_OFF, 4);
+  
+  LCD_GLASS_WriteChar(&LCDString[5], POINT_OFF, APOSTROPHE_OFF, 5);
+  
+  LCD_GLASS_WriteChar("", POINT_OFF, APOSTROPHE_OFF, 6);
+  
+  LCD_GLASS_WriteChar("", POINT_OFF, APOSTROPHE_OFF, 7);
+  */
+#endif 
+  
+  /*!< Request LCD RAM update */
+  LCD_UpdateDisplayRequest();
 }
 
 #ifdef  USE_FULL_ASSERT

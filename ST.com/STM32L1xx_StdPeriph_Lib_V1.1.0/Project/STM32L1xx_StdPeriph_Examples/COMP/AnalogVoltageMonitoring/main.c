@@ -1,3 +1,4 @@
+#error "When I downloaded this example onto my board, it rendered the JTAG port unusable! Use extreme caution!"
 /**
   ******************************************************************************
   * @file    COMP/AnalogVoltageMonitoring/main.c 
@@ -73,6 +74,22 @@ int main(void)
        system_stm32l1xx.c file
      */
 
+  /* Initialize the LCD */ 
+#ifdef USE_STM32L152D_EVAL 
+  STM32L152D_LCD_Init();
+#elif defined USE_STM32L152_EVAL 
+  STM32L152_LCD_Init();	
+  LCD_Clear( Blue );
+  LCD_SetBackColor( Blue );
+  LCD_SetTextColor( White );
+  LCD_DisplayStringLine( Line0, "   STM32L152-EVAL   " );
+  LCD_DisplayStringLine( Line1, " StdPeriphLibV1.1.0 " );
+  LCD_DisplayStringLine( Line2, "     COMPARATOR     " );
+  LCD_DisplayStringLine( Line3, "   Analog Voltage   " );
+  LCD_DisplayStringLine( Line4, "     Monitoring     " );
+  LCD_DisplayStringLine( Line5, "                    " );
+#endif 
+
   uint32_t index = 0;
   
   /* Configure all GPIO pins in Analog mode for lowsest consumption */
@@ -80,19 +97,6 @@ int main(void)
 
   /* ADC configuration: Channel 18 or 31 (PB12 or PF10) is used, End Of Conversion (EOC) interrupt is enabled */
   ADC_Config();
-
-#ifdef USE_STM32L152_EVAL
-  /* LCD GLASS Configuration: LSI as LCD clock source */
-  LCD_Glass_Config();
-  /* Initialize the TFT-LCD */
-  STM32L152_LCD_Init();
-#elif defined USE_STM32L152D_EVAL 
-  /* Initialize the TFT-LCD */
-  STM32L152D_LCD_Init();
-#endif 
-  
-  /* Clear the TFT-LCD */
-  LCD_Clear(LCD_COLOR_WHITE);
   
   while(1)
   {
@@ -133,7 +137,7 @@ int main(void)
         /* Display measured value on LCD */
         for (index = 0; index < 20; index++)
         {
-          LCD_DisplayChar(LCD_LINE_3, (319 - (16 * index)), VoltageDisplay[index]);
+          LCD_DisplayChar(LCD_LINE_6, (319 - (16 * index)), VoltageDisplay[index]);
         }
         /* Check if the measured value is below the threshold VREFINT: 1.22 V */
         if (ADCVal <= 0x000005EA)

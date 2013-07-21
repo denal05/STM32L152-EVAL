@@ -27,8 +27,10 @@
 
 #if defined USE_STM32L152D_EVAL
   #include "stm32l152d_eval.h"
+  #include "stm32l152d_eval_lcd.h"
 #elif defined USE_STM32L152_EVAL
   #include "stm32l152_eval.h"
+  #include "stm32l152_eval_lcd.h"
 #endif
 
 /** @addtogroup STM32L1xx_StdPeriph_Examples
@@ -90,6 +92,26 @@ int main(void)
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32l1xx.c file
      */     
+  
+/* Initialize the LCD */ 
+#ifdef USE_STM32L152D_EVAL 
+  STM32L152D_LCD_Init();
+#elif defined USE_STM32L152_EVAL 
+  STM32L152_LCD_Init();	
+  LCD_Clear( Blue );
+  LCD_SetBackColor( Blue );
+  LCD_SetTextColor( White );
+  LCD_DisplayStringLine( Line0, "   STM32L152-EVAL   " );
+  LCD_DisplayStringLine( Line1, " StdPeriphLibV1.1.0 " );
+  LCD_DisplayStringLine( Line2, "   DAC Signals Gen. " );
+  LCD_DisplayStringLine( Line3, "                    " );
+  LCD_DisplayStringLine( Line4, "INSTRUCTIONS:       " );
+  LCD_DisplayStringLine( Line5, "Use KEY button, open" );
+  LCD_DisplayStringLine( Line6, "JP14, connect pins  " );
+  LCD_DisplayStringLine( Line7, "PA4 (DAC_OUT1) and  " );
+  LCD_DisplayStringLine( Line8, "PA5 (DAC_OUT2) to an" );
+  LCD_DisplayStringLine( Line9, "oscilloscope.       " );
+#endif 
 
   /* Preconfiguration before using DAC----------------------------------------*/
   DAC_PreConfig();
@@ -125,11 +147,13 @@ int main(void)
           /* The sine wave and the escalator wave has been selected */
           /* Sine Wave generator ---------------------------------------------*/
           DAC_DeInit(); 
+
           /* DAC channel1 and channel2 Configuration */
           DAC_InitStructure.DAC_Trigger = DAC_Trigger_T2_TRGO;
           DAC_InitStructure.DAC_WaveGeneration = DAC_WaveGeneration_None;
           DAC_InitStructure.DAC_OutputBuffer = DAC_OutputBuffer_Enable;
 
+          /* DMA init */
           DMA_DeInit(DMA1_Channel3); 
           DMA_InitStructure.DMA_PeripheralBaseAddr = DAC_DHR12R2_Address;
           DMA_InitStructure.DMA_MemoryBaseAddr = (uint32_t)&Sine12bit;
@@ -144,25 +168,25 @@ int main(void)
           DMA_InitStructure.DMA_M2M = DMA_M2M_Disable;
           DMA_Init(DMA1_Channel3, &DMA_InitStructure);
 
-          /* Enable DMA1 Channel3 */
+          /* Enable DMA1 Channel 3 */
           DMA_Cmd(DMA1_Channel3, ENABLE);
 
-            /* DAC Channel2 Init */
+          /* DAC Channel 2 Init */
           DAC_Init(DAC_Channel_2, &DAC_InitStructure);
 
-          /* Enable DAC Channel2 */
+          /* Enable DAC Channel 2 */
           DAC_Cmd(DAC_Channel_2, ENABLE);
 
-          /* Enable DMA for DAC Channel2 */
+          /* Enable DMA for DAC Channel 2 */
           DAC_DMACmd(DAC_Channel_2, ENABLE);
           
           /* Escalator Wave generator ----------------------------------------*/
 
-          /* DAC channel1 Configuration */
+          /* DAC Channel 1 Configuration */
           DAC_InitStructure.DAC_OutputBuffer = DAC_OutputBuffer_Enable;
           DAC_Init(DAC_Channel_1, &DAC_InitStructure);
   
-          /* DMA1 channel2 configuration */
+          /* DMA1 Channel 2 configuration */
           DMA_DeInit(DMA1_Channel2);
   
           DMA_InitStructure.DMA_PeripheralBaseAddr = DAC_DHR8R1_Address;
@@ -172,52 +196,52 @@ int main(void)
           DMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_Byte;
           DMA_Init(DMA1_Channel2, &DMA_InitStructure);
     
-          /* Enable DMA1 Channel2 */
+          /* Enable DMA1 Channel 2 */
           DMA_Cmd(DMA1_Channel2, ENABLE);
     
-          /* Enable DAC Channel1: Once the DAC channel1 is enabled, PA.05 is 
+          /* Enable DAC Channel 1: Once the DAC Channel 1 is enabled, PA.05 is 
              automatically connected to the DAC converter. */
           DAC_Cmd(DAC_Channel_1, ENABLE);
 
-          /* Enable DMA for DAC Channel1 */
+          /* Enable DMA for DAC Channel 1 */
           DAC_DMACmd(DAC_Channel_1, ENABLE);
       }
           /* The triangle wave and the noise wave has been selected */
-       else
-       {
+      else
+      {
           /* Noise Wave generator --------------------------------------------*/
-          /* DAC channel1 Configuration */
+          /* DAC Channel 1 Configuration */
           DAC_InitStructure.DAC_Trigger = DAC_Trigger_T2_TRGO;
           DAC_InitStructure.DAC_WaveGeneration = DAC_WaveGeneration_Noise;
           DAC_InitStructure.DAC_LFSRUnmask_TriangleAmplitude = DAC_LFSRUnmask_Bits8_0;
           DAC_InitStructure.DAC_OutputBuffer = DAC_OutputBuffer_Enable;
           DAC_Init(DAC_Channel_1, &DAC_InitStructure);
 
-          /* Enable DAC Channel1: Once the DAC channel1 is enabled, PA.04 is 
+          /* Enable DAC Channel 1: Once the DAC Channel 1 is enabled, PA.04 is 
              automatically connected to the DAC converter. */
           DAC_Cmd(DAC_Channel_1, ENABLE);
 
-          /* Set DAC Channel1 DHR12L register */
+          /* Set DAC Channel 1 DHR12L register */
           DAC_SetChannel1Data(DAC_Align_12b_L, 0x7FF0);
     
-          /* Enable DAC channel1 wave generator */
+          /* Enable DAC Channel 1 wave generator */
           DAC_WaveGenerationCmd(DAC_Channel_1, DAC_Wave_Noise , ENABLE);
           
           /* Triangle Wave generator -----------------------------------------*/
           DAC_DeInit();
           
-          /* DAC channel2 Configuration */
+          /* DAC Channel 2 Configuration */
           DAC_InitStructure.DAC_Trigger = DAC_Trigger_T2_TRGO;
           DAC_InitStructure.DAC_WaveGeneration = DAC_WaveGeneration_Triangle;
           DAC_InitStructure.DAC_LFSRUnmask_TriangleAmplitude = DAC_TriangleAmplitude_1023;
           DAC_InitStructure.DAC_OutputBuffer = DAC_OutputBuffer_Enable;
           DAC_Init(DAC_Channel_2, &DAC_InitStructure);
 
-          /* Enable DAC Channel2: Once the DAC channel2 is enabled, PA.05 is 
+          /* Enable DAC Channel 2: Once the DAC Channel 2 is enabled, PA.05 is 
              automatically connected to the DAC converter. */
           DAC_Cmd(DAC_Channel_2, ENABLE);
 
-          /* Set DAC channel2 DHR12RD register */
+          /* Set DAC Channel 2 DHR12RD register */
           DAC_SetChannel2Data(DAC_Align_12b_R, 0x100);
       }
       WaveChange = !WaveChange;
