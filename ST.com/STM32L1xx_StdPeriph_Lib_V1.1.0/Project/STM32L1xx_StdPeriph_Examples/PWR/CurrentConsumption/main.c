@@ -27,9 +27,11 @@
 #include "stm32l1xx_ulp_modes.h"
 
 #ifdef USE_STM32L152D_EVAL
-#include "stm32l152d_eval.h"
+  #include "stm32l152d_eval.h"
+  #include "stm32l152d_eval_glass_lcd.h
 #else
-#include "stm32l152_eval.h"
+  #include "stm32l152_eval.h"
+  #include "stm32l152_eval_lcd.h"
 #endif
 
 
@@ -65,6 +67,25 @@ int main(void)
        system_stm32l1xx.c file
      */  
 
+  /* Initialize the LCD */
+  STM32L152_LCD_Init();	
+  LCD_Clear( Blue );
+  LCD_SetBackColor( Blue );
+  LCD_SetTextColor( White );
+  LCD_DisplayStringLine( Line0, " DELAY 5 SECONDS... " );
+  for(Counter = 0; Counter < 0xFFFFFF; Counter++);
+  LCD_Clear( Blue );
+  LCD_DisplayStringLine( Line0, "   STM32L152-EVAL   " );
+  LCD_DisplayStringLine( Line1, " StdPeriphLibV1.1.0 " );
+  LCD_DisplayStringLine( Line2, "PWR/CurrentConsumptn" );
+  LCD_DisplayStringLine( Line3, "                    " );
+  LCD_DisplayStringLine( Line4, "INSTRUCTIONS:       " );
+  LCD_DisplayStringLine( Line5, "Uncomment mode in   " );
+  LCD_DisplayStringLine( Line6, "stm32l1xx_ulp_modes." );
+  LCD_DisplayStringLine( Line7, "h file. Use external" );
+  LCD_DisplayStringLine( Line8, "amperemeter to meas-");
+  LCD_DisplayStringLine( Line9, "ure IDD current.    " );
+  
   /* Enable PWR APB1 Clock */
   RCC_APB1PeriphClockCmd(RCC_APB1Periph_PWR, ENABLE);
 

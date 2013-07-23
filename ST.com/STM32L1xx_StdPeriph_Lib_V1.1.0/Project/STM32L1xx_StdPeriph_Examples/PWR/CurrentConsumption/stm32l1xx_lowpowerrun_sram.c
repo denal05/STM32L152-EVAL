@@ -25,6 +25,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32l1xx.h"
+#include "stm32l1xx_ulp_modes.h"
 
 /** @addtogroup STM32L1xx_StdPeriph_Examples
   * @{

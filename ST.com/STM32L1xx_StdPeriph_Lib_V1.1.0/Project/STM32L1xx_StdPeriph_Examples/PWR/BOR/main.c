@@ -27,7 +27,7 @@
 
 #ifdef USE_STM32L152D_EVAL
   #include "stm32l152d_eval.h"
-  #include "stm32l152d_eval.h"
+  #include "stm32l152d_eval_glass_lcd.h
 #else
   #include "stm32l152_eval.h"
   #include "stm32l152_eval_lcd.h"
@@ -77,11 +77,15 @@ int main(void)
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32l1xx.c file
      */     
+  
   /* Initialize the LCD */
   STM32L152_LCD_Init();	
   LCD_Clear( Blue );
   LCD_SetBackColor( Blue );
   LCD_SetTextColor( White );
+  LCD_DisplayStringLine( Line0, " DELAY 5 SECONDS... " );
+  for(Counter = 0; Counter < 0xFFFFFF; Counter++);
+  LCD_Clear( Blue );
   LCD_DisplayStringLine( Line0, "   STM32L152-EVAL   " );
   LCD_DisplayStringLine( Line1, " StdPeriphLibV1.1.0 " );
   LCD_DisplayStringLine( Line2, " PWR/Brownout Reset " );

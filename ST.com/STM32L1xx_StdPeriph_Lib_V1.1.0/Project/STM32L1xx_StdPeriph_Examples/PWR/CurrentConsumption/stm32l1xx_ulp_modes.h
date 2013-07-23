@@ -42,7 +42,7 @@
  && !defined (STOP_RTC_LSI_MODE) && !defined (STANDBY_MODE) && !defined (STANDBY_RTC_LSE_MODE)\
  && !defined (STANDBY_RTC_LSI_MODE)
 /* Uncomment the corresponding line to select the STM32L1xx Ultra Low Power mode */
-//#define LP_RUN_SRAM_MODE
+#define LP_RUN_SRAM_MODE
 //#define LP_RUN_FLASH_MODE
 //#define SLEEP_MODE
 //#define LP_SLEEP_MODE
