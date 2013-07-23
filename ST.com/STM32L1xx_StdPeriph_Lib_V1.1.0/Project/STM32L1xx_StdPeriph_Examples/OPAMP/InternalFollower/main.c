@@ -25,6 +25,14 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32l1xx.h"
 
+#ifdef USE_STM32L152D_EVAL
+  #include "stm32l152d_eval.h"
+  #include "stm32l152d_eval_lcd.h"
+#else
+  #include "stm32l152_eval.h"
+  #include "stm32l152_eval_lcd.h"
+#endif
+
 /** @addtogroup STM32L1xx_StdPeriph_Examples
   * @{
   */
@@ -58,6 +66,21 @@ int main(void)
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32l1xx.c file
      */     
+    /* Initialize the LCD */
+  STM32L152_LCD_Init();	
+  LCD_Clear( Blue );
+  LCD_SetBackColor( Blue );
+  LCD_SetTextColor( White );
+  LCD_DisplayStringLine( Line0, "   STM32L152-EVAL   " );
+  LCD_DisplayStringLine( Line1, " StdPeriphLibV1.1.0 " );
+  LCD_DisplayStringLine( Line2, "OPAMP/InternalFollwr" );
+  LCD_DisplayStringLine( Line3, "                    " );
+  LCD_DisplayStringLine( Line4, "OPAMP2 is configured" );
+  LCD_DisplayStringLine( Line5, "in internal follower" );
+  LCD_DisplayStringLine( Line6, "mode (unity gain).  " );
+  LCD_DisplayStringLine( Line7, "ADC1 continuously   " );
+  LCD_DisplayStringLine( Line8, "converts ch. 8, conn" );
+  LCD_DisplayStringLine( Line9, "to OPAMP2 output.   " );
 
   /* ADC configuration: Channel 8 (PB0) is internally connected to OPAMP2 output,
      End Of Conversion (EOC) interrupt is enabled */

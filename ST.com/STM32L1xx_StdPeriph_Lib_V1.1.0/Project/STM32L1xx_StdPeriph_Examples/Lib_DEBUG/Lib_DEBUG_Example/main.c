@@ -28,9 +28,11 @@
 #include <stdio.h>
 
 #ifdef USE_STM32L152D_EVAL
-#include "stm32l152d_eval.h"
+  #include "stm32l152d_eval.h"
+  #include "stm32l152d_eval_lcd.h"
 #else
-#include "stm32l152_eval.h"
+  #include "stm32l152_eval.h"
+  #include "stm32l152_eval_lcd.h"
 #endif
 
 
@@ -72,7 +74,22 @@ int main(void)
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32l1xx.c file
      */     
-       
+  /* Initialize the LCD */
+  STM32L152_LCD_Init();	
+  LCD_Clear( Blue );
+  LCD_SetBackColor( Blue );
+  LCD_SetTextColor( White );
+  LCD_DisplayStringLine( Line0, "   STM32L152-EVAL   " );
+  LCD_DisplayStringLine( Line1, " StdPeriphLibV1.1.0 " );
+  LCD_DisplayStringLine( Line2, "     Lib_DEBUG      " );
+  LCD_DisplayStringLine( Line3, "                    " );
+  LCD_DisplayStringLine( Line4, "INSTRUCTIONS:       " );
+  LCD_DisplayStringLine( Line5, "Connect CN2 (USART2)" );
+  LCD_DisplayStringLine( Line6, "@115200, 8-bit word " );
+  LCD_DisplayStringLine( Line7, "length, 1 stop bit, " );
+  LCD_DisplayStringLine( Line8, "no parity, no hw    " );
+  LCD_DisplayStringLine( Line9, "flow control        " );
+  
   GPIO_InitTypeDef GPIOA_InitStructure;
 
   /* USARTx configured as follow:

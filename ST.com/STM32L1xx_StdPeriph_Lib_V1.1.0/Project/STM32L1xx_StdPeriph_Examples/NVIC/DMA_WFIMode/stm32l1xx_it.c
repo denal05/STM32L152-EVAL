@@ -52,6 +52,8 @@ extern __IO uint32_t LowPowerMode;
 extern uint8_t Buffercmp16(uint16_t*, uint16_t*, uint16_t);
 
 /* Private function prototypes -----------------------------------------------*/
+void EXTI0_IRQHandler(void);
+
 /* Private functions ---------------------------------------------------------*/
 
 /******************************************************************************/

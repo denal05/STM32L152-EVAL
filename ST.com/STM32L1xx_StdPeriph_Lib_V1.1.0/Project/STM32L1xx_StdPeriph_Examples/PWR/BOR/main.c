@@ -26,9 +26,11 @@
 #include "stm32l1xx.h"
 
 #ifdef USE_STM32L152D_EVAL
-#include "stm32l152d_eval.h"
+  #include "stm32l152d_eval.h"
+  #include "stm32l152d_eval.h"
 #else
-#include "stm32l152_eval.h"
+  #include "stm32l152_eval.h"
+  #include "stm32l152_eval_lcd.h"
 #endif
 
 /** @addtogroup STM32L1xx_StdPeriph_Examples
@@ -75,6 +77,21 @@ int main(void)
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32l1xx.c file
      */     
+  /* Initialize the LCD */
+  STM32L152_LCD_Init();	
+  LCD_Clear( Blue );
+  LCD_SetBackColor( Blue );
+  LCD_SetTextColor( White );
+  LCD_DisplayStringLine( Line0, "   STM32L152-EVAL   " );
+  LCD_DisplayStringLine( Line1, " StdPeriphLibV1.1.0 " );
+  LCD_DisplayStringLine( Line2, " PWR/Brownout Reset " );
+  LCD_DisplayStringLine( Line3, "                    " );
+  LCD_DisplayStringLine( Line4, "INSTRUCTIONS:       " );
+  LCD_DisplayStringLine( Line5, "Simulate brownout by" );
+  LCD_DisplayStringLine( Line6, "dropping VDD. LED1  " );
+  LCD_DisplayStringLine( Line7, "will toggle to indi-" );
+  LCD_DisplayStringLine( Line8, "cate RUN mode, else ");
+  LCD_DisplayStringLine( Line9, "BOR maintains reset." );
        
   /* Initialize LED1 */
   STM_EVAL_LEDInit(LED1);

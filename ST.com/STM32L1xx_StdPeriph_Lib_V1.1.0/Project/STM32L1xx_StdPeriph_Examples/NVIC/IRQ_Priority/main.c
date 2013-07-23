@@ -27,8 +27,10 @@
 
 #ifdef USE_STM32L152D_EVAL 
   #include "stm32l152d_eval.h"
+  #include "stm32l152d_eval_lcd.h"
 #elif defined USE_STM32L152_EVAL 
   #include "stm32l152_eval.h"
+  #include "stm32l152_eval_lcd.h"
 #endif 
 
 /** @addtogroup STM32L1xx_StdPeriph_Examples
@@ -65,6 +67,22 @@ int main(void)
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32l1xx.c file
      */     
+    /* Initialize the LCD */
+  STM32L152_LCD_Init();	
+  LCD_Clear( Blue );
+  LCD_SetBackColor( Blue );
+  LCD_SetTextColor( White );
+  LCD_DisplayStringLine( Line0, "  NVIC/IRQ_Priority " );
+  LCD_DisplayStringLine( Line1, "-- SELECT button  --" );
+  LCD_DisplayStringLine( Line2, "PreemptionPrio = val" );
+  LCD_DisplayStringLine( Line3, "SubPriority = 0     " );
+  LCD_DisplayStringLine( Line4, "--   KEY button   --" );
+  LCD_DisplayStringLine( Line5, "PreemptionPrio = 0  " );
+  LCD_DisplayStringLine( Line6, "SubPriority = 1     " );
+  LCD_DisplayStringLine( Line7, "--SysTick Handler --" );
+  LCD_DisplayStringLine( Line8, "PreemptionPrio = !PP" );
+  LCD_DisplayStringLine( Line9, "SubPriority = 0     " );
+ 
   
   /* NVIC configuration ------------------------------------------------------*/
   NVIC_Config();     
