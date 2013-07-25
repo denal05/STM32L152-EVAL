@@ -27,8 +27,10 @@
 
 #ifdef USE_STM32L152D_EVAL 
   #include "stm32l152d_eval.h"
+  #include "stm32l152d_eval_lcd.h"
 #elif defined USE_STM32L152_EVAL 
   #include "stm32l152_eval.h"
+  #include "stm32l152_eval_lcd.h"
 #endif 
 
 /** @addtogroup STM32L1xx_StdPeriph_Examples
@@ -66,6 +68,25 @@ int main(void)
        system_stm32l1xx.c file
      */     
 
+  /* Initialize the LCD */
+  STM32L152_LCD_Init();	
+  LCD_Clear( Blue );
+  LCD_SetBackColor( Blue );
+  LCD_SetTextColor( White );
+  LCD_DisplayStringLine( Line0, " DELAY 5 SECONDS... " );
+  for(uint32_t Counter = 0; Counter < 0xFFFFFF; Counter++);
+  LCD_Clear( Blue );
+  LCD_DisplayStringLine( Line0, "   STM32L152-EVAL   " );
+  LCD_DisplayStringLine( Line1, " StdPeriphLibV1.1.0 " );
+  LCD_DisplayStringLine( Line2, "        RCC         " );
+  LCD_DisplayStringLine( Line3, "                    " );
+  LCD_DisplayStringLine( Line4, "INSTRUCTIONS:       " );
+  LCD_DisplayStringLine( Line5, "Watch RCC_ClockFreq " );
+  LCD_DisplayStringLine( Line6, "struct in IAR EWARM." );
+  LCD_DisplayStringLine( Line7, "4 LEDs are toggled  " );
+  LCD_DisplayStringLine( Line8, "with timing defined " );
+  LCD_DisplayStringLine( Line9, "by Delay()          " );
+  
   /* This function fills the RCC_ClockFreq structure with the current
      frequencies of different on chip clocks (for debug purpose) */
   RCC_GetClocksFreq(&RCC_ClockFreq);
@@ -112,14 +133,14 @@ int main(void)
     STM_EVAL_LEDToggle(LED4);
 
     /* Insert a delay */
-    Delay(0xFFFF);
+    Delay(0xFFFFF);
 
     /* Toggle LED1 and LED3 */
     STM_EVAL_LEDToggle(LED1);
     STM_EVAL_LEDToggle(LED3);
 
     /* Insert a delay */
-    Delay(0xFFFF);    
+    Delay(0xFFFFF);    
   }
 }
 
