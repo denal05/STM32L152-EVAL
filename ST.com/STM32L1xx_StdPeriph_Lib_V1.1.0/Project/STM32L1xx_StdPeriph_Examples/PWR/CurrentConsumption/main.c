@@ -28,7 +28,7 @@
 
 #ifdef USE_STM32L152D_EVAL
   #include "stm32l152d_eval.h"
-  #include "stm32l152d_eval_glass_lcd.h
+  #include "stm32l152d_eval_lcd.h"
 #else
   #include "stm32l152_eval.h"
   #include "stm32l152_eval_lcd.h"
@@ -83,7 +83,7 @@ int main(void)
   LCD_DisplayStringLine( Line5, "Uncomment mode in   " );
   LCD_DisplayStringLine( Line6, "stm32l1xx_ulp_modes." );
   LCD_DisplayStringLine( Line7, "h file. Use external" );
-  LCD_DisplayStringLine( Line8, "amperemeter to meas-");
+  LCD_DisplayStringLine( Line8, "amperemeter to meas-" );
   LCD_DisplayStringLine( Line9, "ure IDD current.    " );
   
   /* Enable PWR APB1 Clock */
