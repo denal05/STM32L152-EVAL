@@ -24,7 +24,16 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32l1xx.h"
-#include "stm32l152d_eval_sdio_sd.h"
+
+#ifdef USE_STM32L152D_EVAL 
+  #include "stm32l152d_eval.h"
+  #include "stm32l152d_eval_lcd.h"
+  #include "stm32l152d_eval_sdio_sd.h"
+#elif defined USE_STM32L152_EVAL 
+  #include "stm32l152_eval.h"
+  #include "stm32l152_eval_lcd.h"
+  #error "Sorry, this example works only on STM32L152D_EVAL!"
+#endif 
 
 /** @addtogroup STM32L1xx_StdPeriph_Examples
   * @{
