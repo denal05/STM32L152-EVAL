@@ -56,6 +56,22 @@
 void TimingDelay_Decrement(void);
 void Delay(__IO uint32_t nTime);
 
+/* Private function prototypes -----------------------------------------------*/
+void RTC_Config(void);
+void RTC_TimeRegulate(void);
+void RTC_TimeShow(void);
+void RTC_DateShow(void);
+void RTC_TimeStampShow(void);
+uint8_t USART_Scanf(uint32_t MinValue, uint32_t MaxValue);
+
+#ifdef __GNUC__
+  /* With GCC/RAISONANCE, small printf (option LD Linker->Libraries->Small printf
+     set to 'Yes') calls __io_putchar() */
+  #define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
+#else
+  #define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)
+#endif /* __GNUC__ */
+
 #endif /* __MAIN_H */
 
 /******************* (C) COPYRIGHT 2012 STMicroelectronics *****END OF FILE****/

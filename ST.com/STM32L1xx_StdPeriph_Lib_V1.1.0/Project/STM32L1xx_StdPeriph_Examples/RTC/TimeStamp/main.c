@@ -26,6 +26,13 @@
 #include "stm32l1xx.h"
 #include "main.h"
 
+#ifdef USE_STM32L152D_EVAL 
+  #include "stm32l152d_eval.h"
+  #include "stm32l152d_eval_lcd.h"
+#elif defined USE_STM32L152_EVAL 
+  #include "stm32l152_eval.h"
+  #include "stm32l152_eval_lcd.h"
+#endif 
 
 /** @addtogroup STM32L1xx_StdPeriph_Examples
   * @{
@@ -55,6 +62,7 @@ EXTI_InitTypeDef EXTI_InitStructure;
 __IO uint32_t AsynchPrediv = 0, SynchPrediv = 0;
 
 /* Private function prototypes -----------------------------------------------*/
+
 /* Private functions ---------------------------------------------------------*/
 
 /**
@@ -70,7 +78,26 @@ int main(void)
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32l1xx.c file
      */     
-       
+
+  /* Initialize the LCD */
+  STM32L152_LCD_Init();	
+  LCD_Clear( Blue );
+  LCD_SetBackColor( Blue );
+  LCD_SetTextColor( White );
+  LCD_DisplayStringLine( Line0, " DELAY 5 SECONDS... " );
+  for(uint32_t Counter = 0; Counter < 0xFFFFFF; Counter++);
+  LCD_Clear( Blue );
+  LCD_DisplayStringLine( Line0, "   STM32L152-EVAL   " );
+  LCD_DisplayStringLine( Line1, " StdPeriphLibV1.1.0 " );
+  LCD_DisplayStringLine( Line2, "    RTC/TimeStamp   " );
+  LCD_DisplayStringLine( Line3, "USART2 115200 8b1SNP");
+  LCD_DisplayStringLine( Line4, "Press SEL to save   " );
+  LCD_DisplayStringLine( Line5, "curr. time and date." );
+  LCD_DisplayStringLine( Line6, "Press UP to clear   " );
+  LCD_DisplayStringLine( Line7, "TimeStamp Calendar. " );
+  LCD_DisplayStringLine( Line8, "Press KEY to display" );
+  LCD_DisplayStringLine( Line9, "curr. RTC Calendar. " );
+  
   /* USARTx configured as follow:
         - BaudRate = 115200 baud  
         - Word Length = 8 Bits

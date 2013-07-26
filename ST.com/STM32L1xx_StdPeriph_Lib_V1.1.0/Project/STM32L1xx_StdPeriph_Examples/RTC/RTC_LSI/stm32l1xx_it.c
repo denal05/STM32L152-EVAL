@@ -50,6 +50,8 @@ extern __IO uint32_t CaptureNumber, PeriodValue;
 uint32_t IC1ReadValue1 = 0, IC1ReadValue2 =0;
 
 /* Private function prototypes -----------------------------------------------*/
+void RTC_WKUP_IRQHandler(void);
+
 /* Private functions ---------------------------------------------------------*/
 
 /******************************************************************************/

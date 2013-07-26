@@ -25,6 +25,14 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
+#ifdef USE_STM32L152D_EVAL 
+  #include "stm32l152d_eval.h"
+  #include "stm32l152d_eval_lcd.h"
+#elif defined USE_STM32L152_EVAL 
+  #include "stm32l152_eval.h"
+  #include "stm32l152_eval_lcd.h"
+#endif 
+
 /** @addtogroup STM32L1xx_StdPeriph_Examples
   * @{
   */
@@ -35,7 +43,7 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
-#define MESSAGE1   "        Timer       "
+#define MESSAGE1   "      RTC/Timer      "
 #define MESSAGE2   " LEFT  | RIGHT | UP/DOWN  " 
 #define MESSAGE3   " RESET | START | ADJUST   " 
 
@@ -66,16 +74,17 @@ int main(void)
   uint32_t index = 0, tmp=0 ;
   
   /* Initialize the LCD */
-  STM32L152D_LCD_Init(); 
-  
-  /* Clear the LCD */ 
-  LCD_Clear(White);
-  
-  /* Set the LCD Back Color */
-  LCD_SetBackColor(Blue);
-  
-  /* Set the LCD Text Color */
-  LCD_SetTextColor(White);
+#ifdef USE_STM32L152D_EVAL 
+  STM32L152D_LCD_Init();      
+#elif defined USE_STM32L152_EVAL 
+  STM32L152_LCD_Init();	
+#endif 
+  LCD_Clear( Blue );
+  LCD_SetBackColor( Blue );
+  LCD_SetTextColor( White );
+  LCD_DisplayStringLine( Line0, " DELAY 5 SECONDS... " );
+  for(uint32_t Counter = 0; Counter < 0xFFFFFF; Counter++);
+  LCD_Clear( Blue );
   
   /* Displays MESSAGE1 on line 1 */
   LCD_DisplayStringLine(LINE(0), (uint8_t *)MESSAGE1);

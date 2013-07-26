@@ -88,13 +88,13 @@ int main(void)
   LCD_DisplayStringLine( Line0, "   STM32L152-EVAL   " );
   LCD_DisplayStringLine( Line1, " StdPeriphLibV1.1.0 " );
   LCD_DisplayStringLine( Line2, "    RTC/Calendar    " );
-  LCD_DisplayStringLine( Line3, "                    " );
-  LCD_DisplayStringLine( Line4, "INSTRUCTIONS:       " );
-  LCD_DisplayStringLine( Line5, "Connect CN2 (USART2)" );
-  LCD_DisplayStringLine( Line6, "@115200, 8-bit word " );
-  LCD_DisplayStringLine( Line7, "length, 1 stop bit, " );
-  LCD_DisplayStringLine( Line8, "no parity, no hw    " );
-  LCD_DisplayStringLine( Line9, "flow control        " );
+  LCD_DisplayStringLine( Line3, "USART2 115200 8b1SNP");
+  LCD_DisplayStringLine( Line4, "Press SEL to config " );
+  LCD_DisplayStringLine( Line5, "RTC and Alarm A regs" );
+  LCD_DisplayStringLine( Line6, "Press KEY to dis-   " );
+  LCD_DisplayStringLine( Line7, "play current time   " );
+  LCD_DisplayStringLine( Line8, "Press UP to display " );
+  LCD_DisplayStringLine( Line9, "current alarm       " );
   
   NVIC_InitTypeDef  NVIC_InitStructure;
   EXTI_InitTypeDef  EXTI_InitStructure;
@@ -174,7 +174,7 @@ int main(void)
   }
    
   /* Configure the external interrupt "KEY", "SEL" and "UP" buttons */
-  STM_EVAL_PBInit(BUTTON_KEY, BUTTON_MODE_EXTI); 
+  STM_EVAL_PBInit(BUTTON_KEY, BUTTON_MODE_EXTI);
   STM_EVAL_PBInit(BUTTON_SEL, BUTTON_MODE_EXTI);
   STM_EVAL_PBInit(BUTTON_UP, BUTTON_MODE_EXTI);
 
