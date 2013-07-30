@@ -24,8 +24,16 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32l1xx.h"
-#include "stm32l152_eval.h"
-#include "stm32l152_eval_spi_sd.h"
+
+#ifdef USE_STM32L152D_EVAL 
+  #include "stm32l152d_eval.h"
+  #include "stm32l152d_eval_lcd.h"
+  #include "stm32l152d_eval_spi_sd.h"
+#elif defined USE_STM32L152_EVAL 
+  #include "stm32l152_eval.h"
+  #include "stm32l152_eval_lcd.h"
+  #include "stm32l152_eval_spi_sd.h"
+#endif 
 
 /** @addtogroup STM32L1xx_StdPeriph_Examples
   * @{
@@ -68,7 +76,30 @@ int main(void)
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32l1xx.c file
      */     
-       
+
+  /* Initialize the LCD */
+#ifdef USE_STM32L152D_EVAL 
+  STM32L152D_LCD_Init();	
+#elif defined USE_STM32L152_EVAL 
+  STM32L152_LCD_Init();	
+#endif 
+  LCD_Clear( Blue );
+  LCD_SetBackColor( Blue );
+  LCD_SetTextColor( White );
+  LCD_DisplayStringLine( Line0, " DELAY 5 SECONDS... " );
+  for(uint32_t Counter = 0; Counter < 0xFFFFFF; Counter++);
+  LCD_Clear( Blue );
+  LCD_DisplayStringLine( Line0, "   STM32L152-EVAL   " );
+  LCD_DisplayStringLine( Line1, " StdPeriphLibV1.1.0 " );
+  LCD_DisplayStringLine( Line2, "       SPI/MSD      " );
+  LCD_DisplayStringLine( Line3, "");
+  LCD_DisplayStringLine( Line4, "INSTRUCTIONS:" );
+  LCD_DisplayStringLine( Line5, "The SPI Tx buffer is" );
+  LCD_DisplayStringLine( Line6, "filled. Tx_Buffer & " );
+  LCD_DisplayStringLine( Line7, "Rx_Buffer are comp'd" );
+  LCD_DisplayStringLine( Line8, "If success, LED1 on," );
+  LCD_DisplayStringLine( Line9, "else, LED2 is on.   " );  
+  
   /* Initialize Leds mounted on STM32L152-EVAL board */
   STM_EVAL_LEDInit(LED1);
   STM_EVAL_LEDInit(LED2);
