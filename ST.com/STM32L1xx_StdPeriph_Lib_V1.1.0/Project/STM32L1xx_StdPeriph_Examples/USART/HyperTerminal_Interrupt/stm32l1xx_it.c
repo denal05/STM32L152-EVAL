@@ -61,7 +61,10 @@ uint8_t NbrOfDataToTransfer = TXBUFFERSIZE;
 uint8_t NbrOfDataToRead = RXBUFFERSIZE;
 __IO uint8_t TxCounter = 0; 
 __IO uint16_t RxCounter = 0; 
+
 /* Private function prototypes -----------------------------------------------*/
+void USARTx_IRQHANDLER(void);
+
 /* Private functions ---------------------------------------------------------*/
 
 /******************************************************************************/

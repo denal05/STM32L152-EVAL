@@ -27,11 +27,13 @@
 
 #ifdef USE_STM32L152D_EVAL 
   #include "stm32l152d_eval.h"
+  #include "stm32l152d_eval_lcd.h"
   #define EVAL_COMX EVAL_COM1
   #define COMX COM1
   #define EVAL_COMX_IRQn EVAL_COM1_IRQn
 #elif defined USE_STM32L152_EVAL 
   #include "stm32l152_eval.h"
+  #include "stm32l152_eval_lcd.h"
   #define EVAL_COMX EVAL_COM2
   #define COMX COM2
   #define EVAL_COMX_IRQn EVAL_COM2_IRQn
@@ -72,7 +74,30 @@ int main(void)
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32l1xx.c file
      */    
-              
+
+    /* Initialize the LCD */
+#ifdef USE_STM32L152D_EVAL 
+  STM32L152D_LCD_Init();	
+#elif defined USE_STM32L152_EVAL 
+  STM32L152_LCD_Init();	
+#endif 
+  LCD_Clear( Blue );
+  LCD_SetBackColor( Blue );
+  LCD_SetTextColor( White );
+  LCD_DisplayStringLine( Line0, " DELAY 5 SECONDS... " );
+  for(uint32_t Counter = 0; Counter < 0xFFFFFF; Counter++);
+  LCD_Clear( Blue );
+  LCD_DisplayStringLine( Line0, "   STM32L152-EVAL   " );
+  LCD_DisplayStringLine( Line1, " StdPeriphLibV1.1.0 " );
+  LCD_DisplayStringLine( Line2, " USART/HyperTerm_IRQ" );
+  LCD_DisplayStringLine( Line3, "                    " );
+  LCD_DisplayStringLine( Line4, "INSTRUCTIONS:       " );
+  LCD_DisplayStringLine( Line5, "Connect CN5 (USART3)" );
+  LCD_DisplayStringLine( Line6, "@9600 , 8-bit word  " );
+  LCD_DisplayStringLine( Line7, "length, 2 stop bits," );
+  LCD_DisplayStringLine( Line8, "odd parity, no hw   " );
+  LCD_DisplayStringLine( Line9, "flow control        " );
+  
   /* NVIC configuration */
   NVIC_Config();
   

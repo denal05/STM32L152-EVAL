@@ -27,9 +27,11 @@
 #include "stm32l1xx_lcd.h"
 
 #ifdef USE_STM32L152D_EVAL
-#include "stm32l152d_eval_glass_lcd.h"
+  #include "stm32l152d_eval_glass_lcd.h"
+  #include "stm32l152d_eval_lcd.h"
 #else
-#include "stm32l152_eval_glass_lcd.h"
+  #include "stm32l152_eval_glass_lcd.h"
+  #include "stm32l152_eval_lcd.h"
 #endif
 
 
@@ -71,6 +73,29 @@ int main(void)
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32l1xx.c file
      */       
+
+  /* Initialize the LCD */
+#ifdef USE_STM32L152D_EVAL 
+  STM32L152D_LCD_Init();	
+#elif defined USE_STM32L152_EVAL 
+  STM32L152_LCD_Init();	
+#endif 
+  LCD_Clear( Blue );
+  LCD_SetBackColor( Blue );
+  LCD_SetTextColor( White );
+  LCD_DisplayStringLine( Line0, " DELAY 5 SECONDS... " );
+  for(uint32_t Counter = 0; Counter < 0xFFFFFF; Counter++);
+  LCD_Clear( Blue );
+  LCD_DisplayStringLine( Line0, "   STM32L152-EVAL   " );
+  LCD_DisplayStringLine( Line1, " StdPeriphLibV1.1.0 " );
+  LCD_DisplayStringLine( Line2, "  TIM/InputCapture  " );
+  LCD_DisplayStringLine( Line3, "                    " );
+  LCD_DisplayStringLine( Line4, "TIM4 is configured  " );
+  LCD_DisplayStringLine( Line5, "in InputCapture Mode" );
+  LCD_DisplayStringLine( Line6, "Ext. signal is con- " );
+  LCD_DisplayStringLine( Line7, "nected to TIM4 Ch2  " );
+  LCD_DisplayStringLine( Line8, "as input. Measured  " );
+  LCD_DisplayStringLine( Line9, "f displayed on glass" );   
   
   /* TIM4 Configuration */
   TIM_Config();

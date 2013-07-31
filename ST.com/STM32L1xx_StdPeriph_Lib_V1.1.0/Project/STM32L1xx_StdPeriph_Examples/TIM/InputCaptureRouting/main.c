@@ -27,9 +27,11 @@
 #include "stm32l1xx_lcd.h"
 
 #ifdef USE_STM32L152D_EVAL
-#include "stm32l152d_eval_glass_lcd.h"
+  #include "stm32l152d_eval_glass_lcd.h"
+  #include "stm32l152d_eval_lcd.h"
 #else
-#include "stm32l152_eval_glass_lcd.h"
+  #include "stm32l152_eval_glass_lcd.h"
+  #include "stm32l152_eval_lcd.h"
 #endif
 
 /** @addtogroup STM32L1xx_StdPeriph_Examples
@@ -70,6 +72,29 @@ int main(void)
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32l1xx.c file
      */
+
+  /* Initialize the LCD */
+#ifdef USE_STM32L152D_EVAL 
+  STM32L152D_LCD_Init();	
+#elif defined USE_STM32L152_EVAL 
+  STM32L152_LCD_Init();	
+#endif 
+  LCD_Clear( Blue );
+  LCD_SetBackColor( Blue );
+  LCD_SetTextColor( White );
+  LCD_DisplayStringLine( Line0, " DELAY 5 SECONDS... " );
+  for(uint32_t Counter = 0; Counter < 0xFFFFFF; Counter++);
+  LCD_Clear( Blue );
+  LCD_DisplayStringLine( Line0, "   STM32L152-EVAL   " );
+  LCD_DisplayStringLine( Line1, " StdPeriphLibV1.1.0 " );
+  LCD_DisplayStringLine( Line2, "TIM/InputCaptureRout" );
+  LCD_DisplayStringLine( Line3, "                    " );
+  LCD_DisplayStringLine( Line4, "Routing interface is" );
+  LCD_DisplayStringLine( Line5, "configured to map   " );
+  LCD_DisplayStringLine( Line6, "TIM4 Ch2 to PE13 to " );
+  LCD_DisplayStringLine( Line7, "measure f of ext.   " );
+  LCD_DisplayStringLine( Line8, "signal. Measured f  " );
+  LCD_DisplayStringLine( Line9, "displayed on glass. " );
   
   /* System Clocks Configuration */
   TIM_Config();

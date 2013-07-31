@@ -29,7 +29,7 @@ In this example three timers are used:
 
 Timers synchronisation in cascade mode:
 
-1/TIM2 is configured as Master Timer:
+     1/TIM2 is configured as Master Timer:
      - PWM Mode is used
      - The TIM2 Update event is used as Trigger Output  
 
@@ -38,9 +38,9 @@ Timers synchronisation in cascade mode:
      - The ITR1(TIM2) is used as input trigger 
      - Gated mode is used, so start and stop of slave counter
       are controlled by the Master trigger output signal(TIM2 update event).
-      - The TIM3 Update event is used as Trigger Output. 
+     - The TIM3 Update event is used as Trigger Output. 
 
-      3/TIM4 is slave for TIM3,
+     3/TIM4 is slave for TIM3,
      - PWM Mode is used
      - The ITR2(TIM3) is used as input trigger
      - Gated mode is used, so start and stop of slave counter
@@ -56,8 +56,8 @@ Timers synchronisation in cascade mode:
        - At (TIM2 frequency)/ (TIM3 period + 1) = 125 KHz and a duty cycle
          equal to TIM3_CCR1/(TIM3_ARR + 1) = 25%
 
-        The TIM4 is running:
-      - At (TIM3 frequency)/ (TIM4 period + 1) = 31.25 KHz and a duty cycle
+       The TIM4 is running:
+       - At (TIM3 frequency)/ (TIM4 period + 1) = 31.25 KHz and a duty cycle
         equal to TIM4_CCR1/(TIM4_ARR + 1) = 25%
 
 @par Directory contents 

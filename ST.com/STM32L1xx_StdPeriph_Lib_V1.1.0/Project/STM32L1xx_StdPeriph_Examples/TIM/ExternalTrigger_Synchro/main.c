@@ -25,6 +25,12 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32l1xx.h"
 
+#ifdef USE_STM32L152D_EVAL 
+  #include "stm32l152d_eval_lcd.h"
+#elif defined USE_STM32L152_EVAL 
+  #include "stm32l152_eval_lcd.h"
+#endif
+
 /** @addtogroup STM32L1xx_StdPeriph_Examples
   * @{
   */
@@ -59,17 +65,40 @@ int main(void)
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32l1xx.c file
      */     
-       
+
+  /* Initialize the LCD */
+#ifdef USE_STM32L152D_EVAL 
+  STM32L152D_LCD_Init();	
+#elif defined USE_STM32L152_EVAL 
+  STM32L152_LCD_Init();	
+#endif 
+  LCD_Clear( Blue );
+  LCD_SetBackColor( Blue );
+  LCD_SetTextColor( White );
+  LCD_DisplayStringLine( Line0, " DELAY 5 SECONDS... " );
+  for(uint32_t Counter = 0; Counter < 0xFFFFFF; Counter++);
+  LCD_Clear( Blue );
+  LCD_DisplayStringLine( Line0, "   STM32L152-EVAL   " );
+  LCD_DisplayStringLine( Line1, " StdPeriphLibV1.1.0 " );
+  LCD_DisplayStringLine( Line2, " TIM/ExtTrigger_Sync" );
+  LCD_DisplayStringLine( Line3, "                    " );
+  LCD_DisplayStringLine( Line4, "1/TIM9 is master    " );
+  LCD_DisplayStringLine( Line5, "2/TIM9 is slave for " );
+  LCD_DisplayStringLine( Line6, "ext. trigger on TIM9" );
+  LCD_DisplayStringLine( Line7, "3/TIM3 is slave-TIM9" );
+  LCD_DisplayStringLine( Line8, "     and master-TIM4" );
+  LCD_DisplayStringLine( Line9, "4/TIM4 is slave-TIM3" );
+  
   /* --------------------------- System Clocks Configuration ---------------------*/
   /* TIM2, TIM3, TIM4 clock enable */
-  RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3 |RCC_APB1Periph_TIM4 , ENABLE);
+  RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3 | RCC_APB1Periph_TIM4 , ENABLE);
   RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM9 , ENABLE);
   /* GPIOA and GPIOB clock enable */
   RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA | RCC_AHBPeriph_GPIOB , ENABLE);
 
   /*--------------------------------- GPIO Configuration -------------------------*/
   /* GPIOA Configuration: PA.02(TIM9 CH1) , PA.03(TIM9 CH2)and PA.06(TIM3 CH1) as alternate function push-pull */
-  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_2 | GPIO_Pin_3| GPIO_Pin_6;
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_2 | GPIO_Pin_3 | GPIO_Pin_6;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_40MHz;
   GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;

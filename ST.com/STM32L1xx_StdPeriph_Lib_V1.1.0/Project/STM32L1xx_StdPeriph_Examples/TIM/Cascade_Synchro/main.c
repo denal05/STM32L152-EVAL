@@ -25,6 +25,12 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32l1xx.h"
 
+#ifdef USE_STM32L152D_EVAL 
+  #include "stm32l152d_eval_lcd.h"
+#elif defined USE_STM32L152_EVAL 
+  #include "stm32l152_eval_lcd.h"
+#endif
+
 /** @addtogroup STM32L1xx_StdPeriph_Examples
   * @{
   */
@@ -63,10 +69,33 @@ int main(void)
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32l1xx.c file
      */    
-       
+
+  /* Initialize the LCD */
+#ifdef USE_STM32L152D_EVAL 
+  STM32L152D_LCD_Init();	
+#elif defined USE_STM32L152_EVAL 
+  STM32L152_LCD_Init();	
+#endif 
+  LCD_Clear( Blue );
+  LCD_SetBackColor( Blue );
+  LCD_SetTextColor( White );
+  LCD_DisplayStringLine( Line0, " DELAY 5 SECONDS... " );
+  for(uint32_t Counter = 0; Counter < 0xFFFFFF; Counter++);
+  LCD_Clear( Blue );
+  LCD_DisplayStringLine( Line0, "   STM32L152-EVAL   " );
+  LCD_DisplayStringLine( Line1, " StdPeriphLibV1.1.0 " );
+  LCD_DisplayStringLine( Line2, " TIM/Cascade_Synchro" );
+  LCD_DisplayStringLine( Line3, "                    " );
+  LCD_DisplayStringLine( Line4, "1/TIM2 is Master    " );
+  LCD_DisplayStringLine( Line5, "@ 32 MHz            " );
+  LCD_DisplayStringLine( Line6, "2/TIM3 is slave-TIM2" );
+  LCD_DisplayStringLine( Line7, "@ 125 KHz           " );
+  LCD_DisplayStringLine( Line8, "3/TIM4 is slave-TIM3" );
+  LCD_DisplayStringLine( Line9, "@ 31.25 KHz         " ); 
+  
   /* --------------------------- System Clocks Configuration ---------------------*/
   /* TIM2, TIM3 and TIM4 clock enable */
-  RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2 |RCC_APB1Periph_TIM3 |RCC_APB1Periph_TIM4, ENABLE);
+  RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2 | RCC_APB1Periph_TIM3 | RCC_APB1Periph_TIM4, ENABLE);
   /* GPIOA and GPIOD clock enable */
   RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA | RCC_AHBPeriph_GPIOD, ENABLE);
 
@@ -103,14 +132,14 @@ int main(void)
      - PWM Mode is used
      - The ITR1(TIM2) is used as input trigger 
      - Gated mode is used, so start and stop of slave counter
-      are controlled by the Master trigger output signal(TIM2 update event).
-      - The TIM3 Update event is used as Trigger Output. 
+       are controlled by the Master trigger output signal(TIM2 update event).
+     - The TIM3 Update event is used as Trigger Output. 
 
-      3/TIM4 is slave for TIM3,
+     3/TIM4 is slave for TIM3,
      - PWM Mode is used
      - The ITR2(TIM3) is used as input trigger
      - Gated mode is used, so start and stop of slave counter
-      are controlled by the Master trigger output signal(TIM3 update event).
+       are controlled by the Master trigger output signal(TIM3 update event).
 
        The TIMxCLK is fixed to 32 MHz, the TIM2 counter clock is 32 MHz.
 
@@ -122,9 +151,9 @@ int main(void)
        - At (TIM2 frequency)/ (TIM3 period + 1) = 125 KHz and a duty cycle
          equal to TIM3_CCR1/(TIM3_ARR + 1) = 25%
 
-        The TIM4 is running:
-      - At (TIM3 frequency)/ (TIM4 period + 1) = 31.25 KHz and a duty cycle
-        equal to TIM4_CCR1/(TIM4_ARR + 1) = 25%
+       The TIM4 is running:
+       - At (TIM3 frequency)/ (TIM4 period + 1) = 31.25 KHz and a duty cycle
+         equal to TIM4_CCR1/(TIM4_ARR + 1) = 25%
      --------------------------------------------------------------------- */
   /* Time base configuration */
   TIM_TimeBaseStructure.TIM_Period = TIM2_Period;
