@@ -99,7 +99,7 @@ int main(void)
      */
 
   /* Initialize the Demo */
-  Demo_Init();
+  ////Demo_Init();
   
   /* The DOWNStatus, SELStatus or UPStatus will be set in stm32l1xx_it.c 
     when the joystick button(DOWN, SEL or UP) is pressed */
@@ -112,7 +112,7 @@ int main(void)
       /* External Interrupt Disable */
       Demo_IntExtOnOffConfig(DISABLE);
       /* Execute DOWN Function */
-      Menu_DownFunc();
+      ////Menu_DownFunc();
       /* External Interrupt Enable */
       Demo_IntExtOnOffConfig(ENABLE);
     }
@@ -123,7 +123,7 @@ int main(void)
       /* External Interrupt Disable */
       Demo_IntExtOnOffConfig(DISABLE);
       /* Execute SEL Function */
-      Menu_SelFunc();
+      ////Menu_SelFunc();
       /* External Interrupt Enable */
       Demo_IntExtOnOffConfig(ENABLE);
     }
@@ -134,7 +134,7 @@ int main(void)
       /* External Interrupt Disable */
       Demo_IntExtOnOffConfig(DISABLE);
       /* Execute UP Function */
-      Menu_UpFunc();
+      ////Menu_UpFunc();
       /* External Interrupt Enable */
       Demo_IntExtOnOffConfig(ENABLE);
     }
