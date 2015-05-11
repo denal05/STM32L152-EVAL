@@ -1,0 +1,210 @@
+
+<ApplicationBuild Header="Project" Extern=".\Project.rapp" Path=".\Project.rapp" OutputFile=".\STM32L152-EVAL\Project.elf" sate="96" Config="STM32L152-EVAL" >
+	<Configs>
+		<Config Header="STM32L152-EVAL" />
+																																																																																																																																																																																																																																																																																																																																																																																																																																	
+	</Configs>
+	<Group Header="CMSIS" Marker="-1" OutputFile="" sate="96" >
+		<NodeC Path="..\src\system_stm32l1xx.c" Header="system_stm32l1xx.c" Marker="-1" OutputFile=".\STM32L152-EVAL\system_stm32l1xx.o" sate="0" />
+																																																																																																																																																																																																																							
+	</Group>
+	<Group Header="StdPeriph_Driver" Marker="-1" OutputFile="" sate="96" >
+		<NodeC Path="..\..\..\LIBRARIES\STM32L1xx_StdPeriph_Driver\src\misc.c" Header="misc.c" Marker="-1" OutputFile=".\STM32L152-EVAL\misc.o" sate="0" />
+		<NodeC Path="..\..\..\LIBRARIES\STM32L1xx_StdPeriph_Driver\src\stm32l1xx_adc.c" Header="stm32l1xx_adc.c" Marker="-1" OutputFile=".\STM32L152-EVAL\stm32l1xx_adc.o" sate="0" />
+		<NodeC Path="..\..\..\LIBRARIES\STM32L1xx_StdPeriph_Driver\src\stm32l1xx_comp.c" Header="stm32l1xx_comp.c" Marker="-1" OutputFile=".\STM32L152-EVAL\stm32l1xx_comp.o" sate="0" />
+		<NodeC Path="..\..\..\LIBRARIES\STM32L1xx_StdPeriph_Driver\src\stm32l1xx_crc.c" Header="stm32l1xx_crc.c" Marker="-1" OutputFile=".\STM32L152-EVAL\stm32l1xx_crc.o" sate="0" />
+		<NodeC Path="..\..\..\LIBRARIES\STM32L1xx_StdPeriph_Driver\src\stm32l1xx_dac.c" Header="stm32l1xx_dac.c" Marker="-1" OutputFile=".\STM32L152-EVAL\stm32l1xx_dac.o" sate="0" />
+		<NodeC Path="..\..\..\LIBRARIES\STM32L1xx_StdPeriph_Driver\src\stm32l1xx_dbgmcu.c" Header="stm32l1xx_dbgmcu.c" Marker="-1" OutputFile=".\STM32L152-EVAL\stm32l1xx_dbgmcu.o" sate="0" />
+		<NodeC Path="..\..\..\LIBRARIES\STM32L1xx_StdPeriph_Driver\src\stm32l1xx_dma.c" Header="stm32l1xx_dma.c" Marker="-1" OutputFile=".\STM32L152-EVAL\stm32l1xx_dma.o" sate="0" />
+		<NodeC Path="..\..\..\LIBRARIES\STM32L1xx_StdPeriph_Driver\src\stm32l1xx_exti.c" Header="stm32l1xx_exti.c" Marker="-1" OutputFile=".\STM32L152-EVAL\stm32l1xx_exti.o" sate="0" />
+		<NodeC Path="..\..\..\LIBRARIES\STM32L1xx_StdPeriph_Driver\src\stm32l1xx_flash.c" Header="stm32l1xx_flash.c" Marker="-1" OutputFile=".\STM32L152-EVAL\stm32l1xx_flash.o" sate="0" />
+		<NodeC Path="..\..\..\LIBRARIES\STM32L1xx_StdPeriph_Driver\src\stm32l1xx_gpio.c" Header="stm32l1xx_gpio.c" Marker="-1" OutputFile=".\STM32L152-EVAL\stm32l1xx_gpio.o" sate="0" />
+		<NodeC Path="..\..\..\LIBRARIES\STM32L1xx_StdPeriph_Driver\src\stm32l1xx_i2c.c" Header="stm32l1xx_i2c.c" Marker="-1" OutputFile=".\STM32L152-EVAL\stm32l1xx_i2c.o" sate="0" />
+		<NodeC Path="..\..\..\LIBRARIES\STM32L1xx_StdPeriph_Driver\src\stm32l1xx_iwdg.c" Header="stm32l1xx_iwdg.c" Marker="-1" OutputFile=".\STM32L152-EVAL\stm32l1xx_iwdg.o" sate="0" />
+		<NodeC Path="..\..\..\LIBRARIES\STM32L1xx_StdPeriph_Driver\src\stm32l1xx_lcd.c" Header="stm32l1xx_lcd.c" Marker="-1" OutputFile=".\STM32L152-EVAL\stm32l1xx_lcd.o" sate="0" />
+		<NodeC Path="..\..\..\LIBRARIES\STM32L1xx_StdPeriph_Driver\src\stm32l1xx_pwr.c" Header="stm32l1xx_pwr.c" Marker="-1" OutputFile=".\STM32L152-EVAL\stm32l1xx_pwr.o" sate="0" />
+		<NodeC Path="..\..\..\LIBRARIES\STM32L1xx_StdPeriph_Driver\src\stm32l1xx_rcc.c" Header="stm32l1xx_rcc.c" Marker="-1" OutputFile=".\STM32L152-EVAL\stm32l1xx_rcc.o" sate="0" />
+		<NodeC Path="..\..\..\LIBRARIES\STM32L1xx_StdPeriph_Driver\src\stm32l1xx_rtc.c" Header="stm32l1xx_rtc.c" Marker="-1" OutputFile=".\STM32L152-EVAL\stm32l1xx_rtc.o" sate="0" />
+		<NodeC Path="..\..\..\LIBRARIES\STM32L1xx_StdPeriph_Driver\src\stm32l1xx_spi.c" Header="stm32l1xx_spi.c" Marker="-1" OutputFile=".\STM32L152-EVAL\stm32l1xx_spi.o" sate="0" />
+		<NodeC Path="..\..\..\LIBRARIES\STM32L1xx_StdPeriph_Driver\src\stm32l1xx_syscfg.c" Header="stm32l1xx_syscfg.c" Marker="-1" OutputFile=".\STM32L152-EVAL\stm32l1xx_syscfg.o" sate="0" />
+		<NodeC Path="..\..\..\LIBRARIES\STM32L1xx_StdPeriph_Driver\src\stm32l1xx_tim.c" Header="stm32l1xx_tim.c" Marker="-1" OutputFile=".\STM32L152-EVAL\stm32l1xx_tim.o" sate="0" />
+		<NodeC Path="..\..\..\LIBRARIES\STM32L1xx_StdPeriph_Driver\src\stm32l1xx_usart.c" Header="stm32l1xx_usart.c" Marker="-1" OutputFile=".\STM32L152-EVAL\stm32l1xx_usart.o" sate="0" />
+		<NodeC Path="..\..\..\LIBRARIES\STM32L1xx_StdPeriph_Driver\src\stm32l1xx_wwdg.c" Header="stm32l1xx_wwdg.c" Marker="-1" OutputFile=".\STM32L152-EVAL\stm32l1xx_wwdg.o" sate="0" />
+																																																																																																																																																																																																														
+	</Group>
+	<Group Header="User" Marker="-1" OutputFile="" sate="0" >
+		<NodeC Path="..\src\calendar.c" Header="calendar.c" Marker="-1" OutputFile=".\STM32L152-EVAL\calendar.o" sate="0" />
+		<NodeC Path="..\src\diskio.c" Header="diskio.c" Marker="-1" OutputFile=".\STM32L152-EVAL\diskio.o" sate="0" />
+		<NodeC Path="..\src\hw_config.c" Header="hw_config.c" Marker="-1" OutputFile=".\STM32L152-EVAL\hw_config.o" sate="0" />
+		<NodeC Path="..\src\iddmeasurement.c" Header="iddmeasurement.c" Marker="-1" OutputFile=".\STM32L152-EVAL\iddmeasurement.o" sate="0" />
+		<NodeC Path="..\src\main.c" Header="main.c" Marker="-1" OutputFile=".\STM32L152-EVAL\main.o" sate="0" />
+		<NodeC Path="..\src\mass_mal.c" Header="mass_mal.c" Marker="-1" OutputFile=".\STM32L152-EVAL\mass_mal.o" sate="0" />
+		<NodeC Path="..\src\mass_storage.c" Header="mass_storage.c" Marker="-1" OutputFile=".\STM32L152-EVAL\mass_storage.o" sate="0" />
+		<NodeC Path="..\src\memory.c" Header="memory.c" Marker="-1" OutputFile=".\STM32L152-EVAL\memory.o" sate="0" />
+		<NodeC Path="..\src\menu.c" Header="menu.c" Marker="-1" OutputFile=".\STM32L152-EVAL\menu.o" sate="0" />
+		<NodeC Path="..\src\scsi_data.c" Header="scsi_data.c" Marker="-1" OutputFile=".\STM32L152-EVAL\scsi_data.o" sate="0" />
+		<NodeC Path="..\src\stm32l1xx_clock_config.c" Header="stm32l1xx_clock_config.c" Marker="-1" OutputFile=".\STM32L152-EVAL\stm32l1xx_clock_config.o" sate="0" />
+		<NodeC Path="..\src\stm32l1xx_it.c" Header="stm32l1xx_it.c" Marker="-1" OutputFile=".\STM32L152-EVAL\stm32l1xx_it.o" sate="0" />
+		<NodeC Path="..\src\storage.c" Header="storage.c" Marker="-1" OutputFile=".\STM32L152-EVAL\storage.o" sate="0" />
+		<NodeC Path="..\src\usb_bot.c" Header="usb_bot.c" Marker="-1" OutputFile=".\STM32L152-EVAL\usb_bot.o" sate="0" />
+		<NodeC Path="..\src\usb_desc.c" Header="usb_desc.c" Marker="-1" OutputFile=".\STM32L152-EVAL\usb_desc.o" sate="0" />
+		<NodeC Path="..\src\usb_endp.c" Header="usb_endp.c" Marker="-1" OutputFile=".\STM32L152-EVAL\usb_endp.o" sate="0" />
+		<NodeC Path="..\src\usb_istr.c" Header="usb_istr.c" Marker="-1" OutputFile=".\STM32L152-EVAL\usb_istr.o" sate="0" />
+		<NodeC Path="..\src\usb_prop.c" Header="usb_prop.c" Marker="-1" OutputFile=".\STM32L152-EVAL\usb_prop.o" sate="0" />
+		<NodeC Path="..\src\usb_pwr.c" Header="usb_pwr.c" Marker="-1" OutputFile=".\STM32L152-EVAL\usb_pwr.o" sate="0" />
+		<NodeC Path="..\src\usb_scsi.c" Header="usb_scsi.c" Marker="-1" OutputFile=".\STM32L152-EVAL\usb_scsi.o" sate="0" />
+		<NodeC Path="..\src\waveplayer.c" Header="waveplayer.c" Marker="-1" OutputFile=".\STM32L152-EVAL\waveplayer.o" sate="0" />
+																																																																																																																																																																																																																		
+	</Group>
+	<Group Header="RIDE" Marker="-1" OutputFile="" sate="96" >
+		<NodeASM Path="..\..\..\Libraries\CMSIS\Device\ST\STM32L1xx\Source\Templates\gcc_ride7\startup_stm32l1xx_md.s" Header="startup_stm32l1xx_md.s" Marker="-1" OutputFile=".\STM32L152-EVAL\startup_stm32l1xx_md.o" sate="0" />
+																																																																																																																																																																																																																		
+	</Group>
+	<Group Header="STM32_EVAL" Marker="-1" OutputFile="" sate="96" >
+		<NodeC Path="..\..\..\Utilities\STM32_EVAL\STM32L152_EVAL\stm32l152_eval_lcd.c" Header="stm32l152_eval_lcd.c" Marker="-1" OutputFile=".\STM32L152-EVAL\stm32l152_eval_lcd.o" sate="0" />
+		<NodeC Path="..\..\..\Utilities\STM32_EVAL\STM32L152_EVAL\stm32l152_eval_glass_lcd.c" Header="stm32l152_eval_glass_lcd.c" Marker="-1" OutputFile=".\STM32L152-EVAL\stm32l152_eval_glass_lcd.o" sate="0" />
+		<NodeC Path="..\..\..\Utilities\STM32_EVAL\STM32L152_EVAL\stm32l152_eval.c" Header="stm32l152_eval.c" Marker="-1" OutputFile=".\STM32L152-EVAL\stm32l152_eval.o" sate="0" />
+		<NodeC Path="..\..\..\Utilities\STM32_EVAL\STM32L152_EVAL\stm32l152_eval_spi_sd.c" Header="stm32l152_eval_spi_sd.c" Marker="-1" OutputFile=".\STM32L152-EVAL\stm32l152_eval_spi_sd.o" sate="0" />
+		<NodeC Path="..\..\..\Utilities\STM32_EVAL\STM32L152_EVAL\stm32l152_eval_i2c_tsensor.c" Header="stm32l152_eval_i2c_tsensor.c" Marker="-1" OutputFile=".\STM32L152-EVAL\stm32l152_eval_i2c_tsensor.o" sate="0" />
+																																																																																																																																																			
+	</Group>
+	<Group Header="USB-FS-Device_Driver" Marker="-1" OutputFile="" sate="0" >
+		<NodeC Path="..\..\..\Libraries\STM32_USB-FS-Device_Driver\src\otgd_fs_cal.c" Header="otgd_fs_cal.c" Marker="-1" OutputFile=".\STM32L152-EVAL\otgd_fs_cal.o" sate="0" />
+		<NodeC Path="..\..\..\Libraries\STM32_USB-FS-Device_Driver\src\otgd_fs_dev.c" Header="otgd_fs_dev.c" Marker="-1" OutputFile=".\STM32L152-EVAL\otgd_fs_dev.o" sate="0" />
+		<NodeC Path="..\..\..\Libraries\STM32_USB-FS-Device_Driver\src\otgd_fs_int.c" Header="otgd_fs_int.c" Marker="-1" OutputFile=".\STM32L152-EVAL\otgd_fs_int.o" sate="0" />
+		<NodeC Path="..\..\..\Libraries\STM32_USB-FS-Device_Driver\src\otgd_fs_pcd.c" Header="otgd_fs_pcd.c" Marker="-1" OutputFile=".\STM32L152-EVAL\otgd_fs_pcd.o" sate="0" />
+		<NodeC Path="..\..\..\Libraries\STM32_USB-FS-Device_Driver\src\usb_core.c" Header="usb_core.c" Marker="-1" OutputFile=".\STM32L152-EVAL\usb_core.o" sate="0" />
+		<NodeC Path="..\..\..\Libraries\STM32_USB-FS-Device_Driver\src\usb_init.c" Header="usb_init.c" Marker="-1" OutputFile=".\STM32L152-EVAL\usb_init.o" sate="0" />
+		<NodeC Path="..\..\..\Libraries\STM32_USB-FS-Device_Driver\src\usb_int.c" Header="usb_int.c" Marker="-1" OutputFile=".\STM32L152-EVAL\usb_int.o" sate="0" />
+		<NodeC Path="..\..\..\Libraries\STM32_USB-FS-Device_Driver\src\usb_mem.c" Header="usb_mem.c" Marker="-1" OutputFile=".\STM32L152-EVAL\usb_mem.o" sate="0" />
+		<NodeC Path="..\..\..\Libraries\STM32_USB-FS-Device_Driver\src\usb_regs.c" Header="usb_regs.c" Marker="-1" OutputFile=".\STM32L152-EVAL\usb_regs.o" sate="0" />
+		<NodeC Path="..\..\..\Libraries\STM32_USB-FS-Device_Driver\src\usb_sil.c" Header="usb_sil.c" Marker="-1" OutputFile=".\STM32L152-EVAL\usb_sil.o" sate="0" />
+						
+	</Group>
+	<Group Header="FatFs" Marker="-1" OutputFile="" sate="96" >
+		<NodeC Path="..\..\..\Utilities\Third_Party\FatFs_vR0.08a\ff.c" Header="ff.c" Marker="-1" OutputFile=".\STM32L152-EVAL\ff.o" sate="0" />
+						
+	</Group>
+	<Options>
+		<Config Header="Standard" >
+			<Set Header="ApplicationBuild" >
+				<Section Header="General" >
+					<Property Header="TargetFamily" Value="ARM" />
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																														
+				</Section>
+				<Section Header="Directories" >
+					<Property Header="IncDir" Value="..;..\..\library\inc" Removable="1" />
+					<Property Header="OutDir" Value="$(ApplicationDir)\obj" Removable="1" />
+					<Property Header="ListDir" Value="$(ApplicationDir)\lst" Removable="1" />
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																			
+				</Section>
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																									
+			</Set>
+			<Set Header="Target" >
+				<Section Header="ProcessorARM" >
+					<Property Header="Processor" Value="STM32F103VBT6" />
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																														
+				</Section>
+				<Section Header="ToolSetARM" >
+					<Property Header="BuildToolSetARM" Value="ARM\\GNU.config" Removable="1" />
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																														
+				</Section>
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																														
+			</Set>
+			<Set Header="GCC" >
+				<Section Header="Defines" >
+					<Property Header="Defines" Value="VECT_TAB_FLASH" Removable="1" />
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																					
+				</Section>
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																							
+			</Set>
+			<Set Header="LD" >
+				<Section Header="LIB" >
+					<Property Header="STLIB" Value="0" Removable="1" />
+					<Property Header="UART0PUTC" Value="0" Removable="1" />
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																					
+				</Section>
+				<Section Header="Scripts" >
+					<Property Header="File" Value=".\STM32F103_128K_20K_DEF.ld" Removable="1" />
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																															
+				</Section>
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																													
+			</Set>
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																								
+		</Config>
+		<Config Header="STM32L152-EVAL" >
+			<Set Header="Target" >
+				<Section Header="ProcessorARM" >
+					<Property Header="Processor" Value="STM32L152VBT6" />
+																																		
+				</Section>
+				<Section Header="ToolSetARM" >
+					<Property Header="BuildToolSetARM" Value="ARM\GNU.config" />
+																
+				</Section>
+												
+			</Set>
+			<Set Header="ApplicationBuild" >
+				<Section Header="Directories" >
+					<Property Header="IncDir" Value="..\inc;..\..\..\Libraries\CMSIS\Include;..\..\..\Libraries\CMSIS\Device\ST\STM32L1xx\Include;..\..\..\Libraries\STM32L1xx_StdPeriph_Driver\inc;..\..\..\Utilities\STM32_EVAL;..\..\..\Utilities\STM32_EVAL\Common;..\..\..\Utilities\STM32_EVAL\STM32L152_EVAL;..\..\..\Utilities\Third_Party\FatFs_vR0.08a;..\..\..\Libraries\STM32_USB-FS-Device_Driver\inc" Removable="1" />
+					<Property Header="OutDir" Value="$(ApplicationDir)\STM32L152-EVAL" Removable="1" />
+					<Property Header="ListDir" Value="$(ApplicationDir)\STM32L152-EVAL" Removable="1" />
+							
+				</Section>
+					
+			</Set>
+			<Set Header="GCC" >
+				<Section Header="Defines" >
+					<Property Header="Defines" Value="USE_STDPERIPH_DRIVER; STM32L1XX_MD; USE_STM32L152_EVAL" Removable="1" />
+																																											
+				</Section>
+				<Section Header="OPTIMIZE" >
+					<Property Header="Optimize" Value="-Os" Removable="1" />
+																																																																																																																																																																																		
+				</Section>
+				<Section Header="More" >
+					<Property Header="More" Value="-w" />
+																																		
+				</Section>
+																										
+			</Set>
+			<Set Header="LD" >
+				<Section Header="Scripts" >
+					<Property Header="SCRIPTFILES" Value="Yes" Removable="1" />
+					<Property Header="File" Value="" Removable="1" />
+					<Property Header="StarterKitLimit" Value="No" Removable="1" />
+																																																																																																																																																																																																																																																																																																																									
+				</Section>
+				<Section Header="Startup" >
+					<Property Header="DEFAULTSTARTUP" Value="No" Removable="1" />
+					<Property Header="File" Value="" Removable="1" />
+																																																																																																																																																																																																																																																																																																																																																													
+				</Section>
+				<Section Header="LIB" >
+					<Property Header="PRINTFTYPE" Value="0" Removable="1" />
+					<Property Header="UART0PUTC" Value="1" Removable="1" />
+																									
+				</Section>
+																			
+			</Set>
+		</Config>
+		<Config Header="STM3210E-EVAL" >
+			<Set Header="ApplicationBuild" >
+				<Section Header="Directories" >
+					<Property Header="OutDir" Value="$(ApplicationDir)\STM32L152-EVAL" Removable="1" />
+					<Property Header="ListDir" Value="$(ApplicationDir)\STM32L152-EVAL" Removable="1" />
+																																																													
+				</Section>
+																																															
+			</Set>
+			<Set Header="Target" >
+				<Section Header="ProcessorARM" >
+					<Property Header="Processor" Value="STM32L151CBT6" />
+																																																				
+				</Section>
+																																								
+			</Set>
+																									
+		</Config>
+	</Options>
+</ApplicationBuild>
