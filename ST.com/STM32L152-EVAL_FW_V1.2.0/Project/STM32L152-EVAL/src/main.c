@@ -99,7 +99,7 @@ int main(void)
      */
 
   /* Initialize the Demo */
-  ////Demo_Init();
+  Demo_Init();
   
   /* The DOWNStatus, SELStatus or UPStatus will be set in stm32l1xx_it.c 
     when the joystick button(DOWN, SEL or UP) is pressed */
@@ -245,22 +245,22 @@ void Demo_Init(void)
     SCB->ICSR |= SCB_ICSR_NMIPENDSET;
   }
   /* Initialize Wave player application */
-  WavePlayer_Init();
+  ////WavePlayer_Init();
   
   /* Checks the availability of the bitmap files */
-  Demo_CheckBitmapFilesStatus(); 
+  ////Demo_CheckBitmapFilesStatus(); 
   
   /* Display the STM32 introduction */
-  Menu_STM32Intro();
+  ////Menu_STM32Intro();
   
   /* Clear the LCD */
   LCD_Clear(LCD_COLOR_WHITE);
 
   /* Initialize the Calendar */
-  Calendar_Init();
+  ////Calendar_Init();
 
   /* Initialize the Thermometer application */
-  LM75_Init();
+  ////LM75_Init();
 
   /* Enable Leds toggling */
   Demo_LedShow(ENABLE);
@@ -272,16 +272,32 @@ void Demo_Init(void)
   LCD_SetTextColor(LCD_COLOR_WHITE);
 
   /* Initialize the Menu */
-  Menu_Init();
+  ////Menu_Init();
 
   /* COMP2 Configuration */
-  Demo_COMPConfig();
+  ////Demo_COMPConfig();
 
   /* Reset the StandbyModeStatus */
   StandbyModeStatus = 0x00;
    
   /* Display the main menu icons */
-  Menu_ShowMenuIcons();
+  ////Menu_ShowMenuIcons();
+
+  /* Display some text on the LCD screen */
+  /* Set the LCD Back Color */
+  LCD_SetBackColor(LCD_COLOR_BLUE);
+  /* Set the LCD Text Color */
+  LCD_SetTextColor(LCD_COLOR_WHITE);
+  LCD_DisplayStringLine(LCD_LINE_0, "   STM32L152-EVAL   ");
+  LCD_DisplayStringLine(LCD_LINE_1, "Lorem ipsum         ");
+  LCD_DisplayStringLine(LCD_LINE_2, "dolor sit amet,     ");
+  LCD_DisplayStringLine(LCD_LINE_3, "consectetur         ");
+  LCD_DisplayStringLine(LCD_LINE_4, "adipiscing elit,    ");
+  LCD_DisplayStringLine(LCD_LINE_5, "sed do eiusmod      ");
+  LCD_DisplayStringLine(LCD_LINE_6, "tempor incididunt   ");
+  LCD_DisplayStringLine(LCD_LINE_7, "ut labore et dolore ");
+  LCD_DisplayStringLine(LCD_LINE_8, "magna aliqua.       ");
+  LCD_DisplayStringLine(LCD_LINE_9, "********************");
 }
 
 /**
